@@ -1,7 +1,12 @@
 #include "Minesweeper.h"
 
-Minesweeper:: Minesweeper(int row, int col, int NumOfMines)
+Minesweeper:: Minesweeper(int Row, int Col, int NumOfMines)
 {
+  row = Row;
+  col = Col;
+  num = NumOfMines;
+  remaining = num;
+
   Uboard = new string* [row];
   for (int i = 0; i < row; i++)
   {
@@ -14,5 +19,20 @@ Minesweeper:: Minesweeper(int row, int col, int NumOfMines)
     Bboard[i] = new string*[col];
   }
 
-  setMines(int NumOfMines);
+  setMines(int num);
+}
+
+Minesweeper:: ~Minesweeper()
+{
+  for (int i = 0; i < row; i++)
+  {
+    delete[] Uboard[i];
+  }
+  delete[] Uboard;
+
+  for (int i = 0; i < row; i++)
+  {
+    delete[] Bboard[i];
+  }
+  delete[] Bboard;
 }

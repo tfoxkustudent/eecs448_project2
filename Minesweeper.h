@@ -9,14 +9,18 @@ using namespace std;
 class Minesweeper
 {
 private:
+  int row;
+  int col;
+  int num;
+  int remaining;
   string** Uboard;
   string** Bboard;
-  void setMine();
+  void setMines(int NumOfMines);
   bool RecCheck();
   int Check();
 
 public:
-  Minesweeper(int row, int col, int NumOfMines);
+  Minesweeper(int Row, int Col, int NumOfMines);
   ~Minesweeper();
 
   void Revealing(int row, int col);
