@@ -8,19 +8,23 @@ Minesweeper:: Minesweeper(int Row, int Col, int NumOfMines)
   remaining = num;
 
   Uboard = new string* [m_row];
-  for (int i = 0; i < row; i++)
+  for (int i = 0; i < m_row; i++)
   {
     Uboard[i] = new string [m_col];
   }
 
   Bboard = new string*[m_row];
-  for (int i = 0; i < row; i++)
+  for (int i = 0; i < m_row; i++)
   {
-    Bboard[i] = new string*[m_col];
+    Bboard[i] = new string[m_col];
   }
 
-  setMines(int num);
+  setMines(num);
 }
+
+
+/*------------------------------------------------------------------------------*/
+
 
 Minesweeper:: ~Minesweeper()
 {
@@ -36,3 +40,15 @@ Minesweeper:: ~Minesweeper()
   }
   delete[] Bboard;
 }
+
+/*------------------------------------------------------------------------------*/
+
+
+void Minesweeper::setMines(int NumOfMines)
+{
+
+}
+
+
+
+
