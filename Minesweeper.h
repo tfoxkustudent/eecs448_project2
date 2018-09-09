@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-
+#include <stdexcept>
 using namespace std;
 
 class Minesweeper
@@ -28,14 +28,14 @@ private:
    *        check the 8 directions.
    * @param:The target position's Row and Col(int).
    */
-  bool RecCheck();
+  void RecCheck(int Row, int Col);
   /* 
    * @pre:  A valid input position.
    * @post: If there are mines adjacent to the target position, 
    *        set the position's content to number of mines adjacent to it.
    * @param:The target position's Row and Col(int).
    */
-  int Check();
+  int Check(int Row, int Col);
 
 public:
   /* 
@@ -49,16 +49,16 @@ public:
   /* 
    * @pre:  A valid input position.
    * @post: Reveal the input position. If the position is a mine, the game is over.
-   * Otherwise, run the rec_check method.
+   *        Otherwise, run the rec_check method.
    * @param:the target position's Row and Col(int).
    */
-  void Revealing(int Row, int Col);
+  bool Revealing(int Row, int Col);
   /* 
    * @pre:  A valid input position.
    * @post: Put the flag on the input position.
    * @param:the target position's Row and Col(int).
    */
-  void Marking(int Row, int Col);
+  bool Marking(int Row, int Col);
 
 };
 #endif

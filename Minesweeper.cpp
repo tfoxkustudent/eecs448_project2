@@ -8,18 +8,18 @@ Minesweeper:: Minesweeper(int Row, int Col, int NumOfMines)
   remaining = num;
 
   Uboard = new string* [m_row];
-  for (int i = 0; i < row; i++)
+  for (int i = 0; i < Row; i++)
   {
     Uboard[i] = new string [m_col];
   }
 
   Bboard = new string*[m_row];
-  for (int i = 0; i < row; i++)
+  for (int i = 0; i < Row; i++)
   {
-    Bboard[i] = new string*[m_col];
+    Bboard[i] = new string[m_col];
   }
 
-  setMines(int num);
+  setMines(NumOfMines);
 }
 
 Minesweeper:: ~Minesweeper()
@@ -35,4 +35,31 @@ Minesweeper:: ~Minesweeper()
     delete[] Bboard[i];
   }
   delete[] Bboard;
+}
+bool Minesweeper::Marking(int Row, int Col)
+{
+  if(Row < m_row && Col < m_col && Row >= 0 && Col >= 0)
+  {
+    Uboard[Row][Col] = "Flag";
+    return(true);
+  }
+  else
+  {
+    return(false);
+  }
+}
+bool Minesweeper::Revealing(int Row, int Col)
+{
+  if(Bboard[Row][Col]!="Mine")
+  {
+    if(Row < m_row && Col < m_col && Row >= 0 && Col >= 0)
+    {
+      RecCheck(Row, Col);
+      return(true);
+    }
+  }
+  else
+  {
+    return(false);
+  }  
 }
