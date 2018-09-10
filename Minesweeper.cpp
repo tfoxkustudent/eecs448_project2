@@ -57,15 +57,35 @@ void Minesweeper::setMines(int mines)
     }
   }
 }
-bool Minesweeper::Marking(int Row, int Col)
+bool Minesweeper::Marking(int Row, int Col, int option)
 {
-  if(Row < m_row && Col < m_col && Row >= 0 && Col >= 0)
+  if(option==1 && Uboard[Row][Col]==" ")
   {
     Uboard[Row][Col] = "Flag";
-    return(true);
+    if(Bboard[Row][Col]=="Mine")
+    {
+      NumOfFlag++;
+      if(NumOfFlag==m_mines)
+      {
+      return(true);//Condition1:set all the flags on the correct mines. 
+      }
+      else
+      {
+      return(false);// Condetion2:set one flag on the correct position.
+      }
+    }
+    else
+    {
+      return(false);//Condition3:set one flag on the wrong position.
+    }
   }
-  else
+  else//unflag function
   {
+    Uboard[Row][Col] = " ";
+    if(Bboard[Row][Col]=="Mine")
+    {
+      NumOfFlag--;
+    }
     return(false);
   }
 }

@@ -14,7 +14,6 @@ private:
   int m_mines;
   string** Uboard;
   string** Bboard;
-  char letter;// trigger for win and lose. Defalt is P(play).
   int NumOfFlag;// The number of the right flags.
   /* 
    * @pre:  Bboard was successfully created.
@@ -29,7 +28,7 @@ private:
    *        check the 8 directions.
    * @param:The target position's Row and Col(int).
    */
-  bool RecCheck(int Row, int Col);
+  void RecCheck(int Row, int Col);
   /* 
    * @pre:  A valid input position.
    * @post: If there are mines adjacent to the target position,
@@ -64,12 +63,11 @@ public:
    * @post: Put the flag on the input position.
    * @param:the target position's Row and Col(int).
    */
-  bool Marking(int Row, int Col);
+  bool Marking(int Row, int Col,int option);
   /*
    * @pre:  Null
    * @post: Return the trigger letter.
    * @param:Null
    */
-  char getLetter();
 };
 #endif
