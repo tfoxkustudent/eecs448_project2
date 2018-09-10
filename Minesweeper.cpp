@@ -69,3 +69,15 @@ void Minesweeper::setMines(std::string **arr, int row, int col, int mimes, std::
   }
 }
 }
+
+void Minesweeper::print()
+{
+  for(int i=0; i<m_row; i++)
+    {
+      for(int j=0; j<m_col; j++)
+      {
+        cout<<Uboard[i][j];
+      }
+      cout<<"\n";
+    }
+}

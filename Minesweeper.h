@@ -19,12 +19,13 @@ private:
   bool RecCheck();
   int Check();
 
+
 public:
   Minesweeper(int Row, int Col, int NumOfMines);
   ~Minesweeper();
 
   void Revealing(int Row, int Col);
   void Marking(int Row, int Col);
-
+  void print();
 };
 #endif
