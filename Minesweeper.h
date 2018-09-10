@@ -15,7 +15,7 @@ private:
   int remaining;
   string** Uboard;
   string** Bboard;
-  void setMines(int NumOfMines);
+  void setMines(std::string **arr, int row, int col, int mimes, std::string mineSignal);
   bool RecCheck();
   int Check();
 
