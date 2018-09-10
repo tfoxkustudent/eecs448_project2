@@ -73,11 +73,8 @@ bool Minesweeper::Revealing(int Row, int Col)
 {
   if(Bboard[Row][Col]!="Mine")
   {
-    if(Row < m_row && Col < m_col && Row >= 0 && Col >= 0)
-    {
       RecCheck(Row, Col);
       return(true);
-    }
   }
   else
   {
