@@ -11,19 +11,17 @@ class Minesweeper
 private:
   int m_row;
   int m_col;
-  int num;
-  int remaining;
+  int m_mines;
   string** Uboard;
   string** Bboard;
-  void setMines(std::string **arr, int row, int col, int mimes, std::string mineSignal);
-  bool RecCheck(int Row,int Col);
-  int Check(int Row,int Col);
+  char letter;// trigger for win and lose. Defalt is P(play).
+  int NumOfFlag;// The number of the right flags.
   /* 
    * @pre:  Bboard was successfully created.
    * @post: Set the mines on Bboard randomly.
    * @param:Number of mines(int).
    */
-  void setMines(int NumOfMines);
+  void setMines(int mines);
   /* 
    * @pre:  A valid input position.
    * @post: If there are mines adjacent to the target position, set the position's 
@@ -31,7 +29,7 @@ private:
    *        check the 8 directions.
    * @param:The target position's Row and Col(int).
    */
-  void RecCheck(int Row, int Col);
+  bool RecCheck(int Row, int Col);
   /* 
    * @pre:  A valid input position.
    * @post: If there are mines adjacent to the target position, 
@@ -61,6 +59,11 @@ public:
    * @param:the target position's Row and Col(int).
    */
   bool Marking(int Row, int Col);
-
+  /*
+   * @pre:  Null
+   * @post: Return the trigger letter.
+   * @param:Null
+   */
+  char getLetter();
 };
 #endif
