@@ -88,5 +88,16 @@ bool Minesweeper::Revealing(int Row, int Col)
   else
   {
     return(false);
-  }  
+  }
+}
+void Minesweeper::print()
+{
+  for(int i=0; i<m_row; i++)
+  {
+    for(int j=0; j<m_col; j++)
+    {
+      cout<<Uboard[i][j];
+    }
+    cout<<"\n";
+  }
 }
