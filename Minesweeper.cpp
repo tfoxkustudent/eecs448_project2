@@ -101,14 +101,91 @@ bool Minesweeper::Revealing(int Row, int Col)
     return(false);
   }  
 }
+
+
+int Minesweeper::Check(int Row, int Col)
+{
+	int count=0;
+	for(int i=0;i<Row;i++)
+	{
+		for(int j=0; j<Col; j++)
+		{
+			if(Bboard[i][j+1]=="mine")
+			{
+				count++;
+			}
+			if(Bboard[i][j-1]=="mine")
+			{
+				count++;
+			}
+			if(Bboard[i+1][j]=="mine")
+			{
+				count++;
+			}
+			if(Bboard[i-1][j]=="mine")
+			{
+				count++;
+			}
+			if(Bboard[i+1][j+1]=="mine")
+			{
+				count++;
+			}
+			if(Bboard[i+1][i-1]=="mine")
+			{
+				count++;
+			}
+			if(Bboard[i-1][j+1]=="mine")
+			{
+				count++;
+			}
+			if(Bboard[i-1][j-1]=="mine")
+			{
+				count++;
+			}
+		}
+	}
+return(count);
+}
+
+
+void Minesweeper::RecCheck(int Row, int Col)
+{
+	if(Check(Row,Col)==0)
+	{
+		Uboard[Row][Col]=="[]";
+		RecCheck(Row-1,Col-1);
+		RecCheck(Row+1,Col+1);
+		RecCheck(Row+1,Col-1);
+		RecCheck(Row-1,Col+1);
+		RecCheck(Row,Col+1);
+		RecCheck(Row+1,Col);
+		RecCheck(Row,Col-1);
+		RecCheck(Row-1,Col);
+	}
+	else
+	{
+		Uboard[Row][Col]=Check(Row,Col);
+	}
+}
+
+
 void Minesweeper::print()
 {
-  for(int i=0; i<m_row; i++)
-  {
-    for(int j=0; j<m_col; j++)
-    {
-      cout<<Uboard[i][j];
-    }
-    cout<<"\n";
-  }
+	cout<<" ";
+	for(int k=1;k<=m_row; k++)
+	{
+		cout<<k;
+	}
+	cout<<endl;
+	for(int i=1; i<=m_row; i++)
+	{
+		cout<<i;
+	
+		for(int j=1; j<=m_col; j++)
+		{
+			cout<<Uboard[i][j];
+		}
+		cout<<"\n";
+	}
 }
+

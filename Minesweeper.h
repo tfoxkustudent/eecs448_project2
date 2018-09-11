@@ -14,6 +14,7 @@ private:
   int m_mines;
   string** Uboard;
   string** Bboard;
+
   int NumOfFlag;// The number of the right flags.
   /* 
    * @pre:  Bboard was successfully created.
@@ -36,12 +37,10 @@ private:
    * @param:The target position's Row and Col(int).
    */
   int Check(int Row, int Col);
-  /*
-   * @pre:  None
-   * @post: Print the Uboard to check for the process
-   * @param:None
-   */
-  void print();
+  
+
+  
+
 public:
   /*
    * @pre:  Null.
@@ -51,6 +50,9 @@ public:
    */
   Minesweeper(int Row, int Col, int NumOfMines);
   ~Minesweeper();
+
+  void print();
+
   /*
    * @pre:  A valid input position.
    * @post: Reveal the input position. If the position is a mine, the game is over.
@@ -69,5 +71,6 @@ public:
    * @post: Return the trigger letter.
    * @param:Null
    */
+
 };
 #endif
