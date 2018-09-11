@@ -6,6 +6,7 @@ Minesweeper:: Minesweeper(int Row, int Col, int NumOfMines)
   m_row = Row;
   m_col = Col;
   m_mines = NumOfMines;
+  NumOfFlag=0;
   //cout<<m_mines<<"M\n";
   //remaining = num;
 
@@ -62,9 +63,9 @@ void Minesweeper::setMines(int mines)
 }
 bool Minesweeper::Marking(int Row, int Col, int option)
 {
-  if(option==1 && Uboard[Row][Col]==" ")
+  if(option==1)
   {
-    Uboard[Row][Col] = "Flag";
+    Uboard[Row][Col] = "F";
     if(Bboard[Row][Col]=="M")
     {
       NumOfFlag++;
@@ -84,7 +85,7 @@ bool Minesweeper::Marking(int Row, int Col, int option)
   }
   else//unflag function
   {
-    Uboard[Row][Col] = " ";
+    Uboard[Row][Col] = "U";
     if(Bboard[Row][Col]=="M")
     {
       NumOfFlag--;
@@ -108,40 +109,133 @@ bool Minesweeper::Revealing(int Row, int Col)
 
 int Minesweeper::Check(int Row, int Col)
 {
-	int count=0;
-	for(int i=0;i<Row;i++)
-	{
-		for(int j=0; j<Col; j++)
-		{
-      if(Row-1<m_row)
+
+  int count=0;
+      if(Row<m_row && Col+1 < m_col && Row>0 && Col+1>0)
       {
-        if
+        if(Bboard[Row][Col+1]=="M")
+        {
+          count++;
+        }
       }
-		}
-	}
-return(count);
+     if(Row<m_row && Col-1 < m_col && Row>0 && Col-1>0)
+     {
+      if(Bboard[Row][Col-1]=="M")
+      {
+        count++;
+      }
+     }
+     if(Row+1<m_row && Col< m_col && Row+1>0 && Col>0)
+     {
+      if(Bboard[Row+1][Col]=="M")
+      {
+        count++;
+      }
+     }
+     if(Row-1<m_row && Col<m_col && Row-1>0 && Col>0)
+     {
+      if(Bboard[Row-1][Col]=="M")
+      {
+        count++;
+      }
+     }
+     if(Row+1<m_row && Col+1 < m_co l&& Row+1>0 && Col+1>0)
+     {
+        if(Bboard[Row+1][Col+1]=="M")
+      {
+        count++;
+      }
+     }
+     if(Row+1<m_row && Col-1 < m_col && Row+1>0 && Col-1>0)
+     {
+        if(Bboard[Row+1][Col-1]=="M")
+      {
+        count++;
+      }
+     }
+     if(Row-1<m_row && Col+1 < m_col&& Row-1>0 && Col+1>0)
+     {
+      if(Bboard[Row-1][Col+1]=="M")
+      {
+        count++;
+      }
+     }
+     if(Row-1<m_row && Col-1 <m_col&& Row-1>0 && Col-1>0)
+     {
+      if(Bboard[Row-1][Col-1]=="M")
+      {
+        count++;
+      }
+  }
+  return(count);
 }
 
 
 void Minesweeper::RecCheck(int Row, int Col)
 {
-  cout<<Check(Row,Col)<<endl;
-	if(Check(Row,Col)==0)
-	{
-		Uboard[Row][Col]="[]";
-		RecCheck(Row-1,Col-1);
-		RecCheck(Row+1,Col+1);
-		RecCheck(Row+1,Col-1);
-		RecCheck(Row-1,Col+1);
-		RecCheck(Row,Col+1);
-		RecCheck(Row+1,Col);
-		RecCheck(Row,Col-1);
-		RecCheck(Row-1,Col);
-	}
-	else
-	{
-		Uboard[Row][Col]=to_string(Check(Row,Col));
-	}
+  if(Check(Row,Col)==0 && Uboard[Row][Col]=="■")
+  {
+    Uboard[Row][Col]="□";
+    if(Row-1<m_row && Col-1 < m_col && Row-1>=0 && Col-1>=0)
+    {
+      Uboard[Row][Col]="□";
+      RecCheck(Row-1,Col-1);
+      
+    }
+    if(Row+1<m_row && Col+1 < m_col && Row+1>=0 && Col+1>=0)
+    {
+      Uboard[Row][Col]="□";
+      RecCheck(Row+1,Col+1);
+      
+    }
+    if(Row+1<m_row && Col-1 < m_col&& Row+1>=0 && Col-1>=0)
+    {
+      Uboard[Row][Col]="□";
+      RecCheck(Row+1,Col-1);
+      
+    }
+    if(Row-1<m_row && Col+1 < m_col&& Row-1>=0 && Col+1>=0)
+    {
+      Uboard[Row][Col]="□";
+      RecCheck(Row-1,Col+1);
+      
+    }
+    if(Row<m_row && Col+1 < m_col&& Row>=0 && Col+1>=0)
+    {
+      Uboard[Row][Col]="□";
+      RecCheck(Row,Col+1);
+      
+    }
+    if(Row+1<m_row && Col < m_col && Row+1>=0 && Col>=0)
+    {
+      Uboard[Row][Col]="□";
+      RecCheck(Row+1,Col);
+      
+    }
+    if(Row<m_row && Col-1 < m_col&& Row>=0 && Col-1>=0)
+    {
+      Uboard[Row][Col]="□";
+      RecCheck(Row,Col-1);
+      
+    }
+    if(Row-1<m_row && Col <m_col&& Row-1>=0 && Col>=0)
+    {
+      Uboard[Row][Col]="□";
+      RecCheck(Row-1,Col);
+     
+    }
+  }
+  else
+  {
+    if(Check(Row,Col)==0)
+    {
+      Uboard[Row][Col]="□";
+    }
+    else
+    {
+      Uboard[Row][Col]=to_string(Check(Row,Col));
+    }
+  }
 }
 
 

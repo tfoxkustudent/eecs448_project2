@@ -53,6 +53,7 @@ void Executive::run()
 			std::cin>>row;
 			std::cout<<"Please enter your column:";
 			std::cin>>col;
+			// sweep.Revealing(row,col);
 			if(sweep.Revealing(row,col)==false)
 			{
 				std::cout<<"Sorry.You lose!";
@@ -65,7 +66,7 @@ void Executive::run()
 			std::cin>>row;
 			std::cout<<"Please enter your column:";
 			std::cin>>col;
-			sweep.Marking(row,col,1);
+			//sweep.Marking(row,col,1);
 			if(sweep.Marking(row,col,1))
 			{
 				std::cout<<"Congratulations!You win the game!\n";
