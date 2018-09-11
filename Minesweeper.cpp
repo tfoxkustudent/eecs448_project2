@@ -139,7 +139,7 @@ int Minesweeper::Check(int Row, int Col)
         count++;
       }
      }
-     if(Row+1<m_row && Col+1 < m_co l&& Row+1>0 && Col+1>0)
+     if(Row+1<m_row && Col+1 < m_col&& Row+1>0 && Col+1>0)
      {
         if(Bboard[Row+1][Col+1]=="M")
       {
