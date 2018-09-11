@@ -21,6 +21,7 @@ private:
    * @post: Set the mines on Bboard randomly.
    * @param:Number of mines(int).
    */
+
   void setMines(int mines);
   /* 
    * @pre:  A valid input position.
@@ -51,6 +52,7 @@ public:
   Minesweeper(int Row, int Col, int NumOfMines);
   ~Minesweeper();
 
+
   void print();
 
   /*
@@ -65,12 +67,14 @@ public:
    * @post: Put the flag on the input position.
    * @param:the target position's Row and Col(int).
    */
+
   bool Marking(int Row, int Col,int option);
   /*
    * @pre:  Null
    * @post: Return the trigger letter.
    * @param:Null
    */
+
 
 };
 #endif
