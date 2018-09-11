@@ -1,10 +1,12 @@
 #include "Minesweeper.h"
+#include <string>
 using namespace std;
 Minesweeper:: Minesweeper(int Row, int Col, int NumOfMines)
 {
   m_row = Row;
   m_col = Col;
   m_mines = NumOfMines;
+  //cout<<m_mines<<"M\n";
   //remaining = num;
 
   Uboard = new string* [m_row];
@@ -17,7 +19,14 @@ Minesweeper:: Minesweeper(int Row, int Col, int NumOfMines)
   {
     Bboard[i] = new string[m_col];
   }
-
+  for(int i=0;i<m_row;i++)
+  {
+    for(int j=0;j<m_col;j++)
+    {
+      Uboard[i][j]="■";
+      Bboard[i][j]="■";
+    }
+  }
   setMines(NumOfMines);
 }
 Minesweeper:: ~Minesweeper()
@@ -37,23 +46,17 @@ Minesweeper:: ~Minesweeper()
 void Minesweeper::setMines(int mines)
 {
 
-  int count; //use to set the number of mines
+  int count=0; //use to set the number of mines
   while(count < mines)
   {
-    for(int i =0; i<m_row; i++)
+    int tempRow = rand() % (m_row-1);
+    int tempCol = rand() % (m_col-1);
+    cout<<tempRow<<tempCol<<endl;
+    //set the mine is the block is blank, otherwise keep looping
+    if(Bboard[tempRow][tempCol] == "■")
     {
-      for(int j; j<m_col; j++)
-        {
-          int tempRow = rand() % (m_row-1);
-          int tempCol = rand() % (m_col-1);
-          //set the mine is the block is blank, otherwise keep looping
-          if(Bboard[tempRow][tempCol] == "")
-          {
-            Bboard[tempRow][tempCol] = "Mine";
-            count++;
-          }
-        }
-        //keep looping if the number of mine is not enough
+      Bboard[tempRow][tempCol] = "M";
+      count++;
     }
   }
 }
@@ -62,7 +65,7 @@ bool Minesweeper::Marking(int Row, int Col, int option)
   if(option==1 && Uboard[Row][Col]==" ")
   {
     Uboard[Row][Col] = "Flag";
-    if(Bboard[Row][Col]=="Mine")
+    if(Bboard[Row][Col]=="M")
     {
       NumOfFlag++;
       if(NumOfFlag==m_mines)
@@ -82,7 +85,7 @@ bool Minesweeper::Marking(int Row, int Col, int option)
   else//unflag function
   {
     Uboard[Row][Col] = " ";
-    if(Bboard[Row][Col]=="Mine")
+    if(Bboard[Row][Col]=="M")
     {
       NumOfFlag--;
     }
@@ -91,14 +94,14 @@ bool Minesweeper::Marking(int Row, int Col, int option)
 }
 bool Minesweeper::Revealing(int Row, int Col)
 {
-  if(Bboard[Row][Col]!="Mine")
+  if(Bboard[Row][Col]=="M")
   {
-      RecCheck(Row, Col);
-      return(true);
+    return(false);
   }
   else
   {
-    return(false);
+    RecCheck(Row, Col);
+    return(true);
   }  
 }
 
@@ -110,38 +113,10 @@ int Minesweeper::Check(int Row, int Col)
 	{
 		for(int j=0; j<Col; j++)
 		{
-			if(Bboard[i][j+1]=="mine")
-			{
-				count++;
-			}
-			if(Bboard[i][j-1]=="mine")
-			{
-				count++;
-			}
-			if(Bboard[i+1][j]=="mine")
-			{
-				count++;
-			}
-			if(Bboard[i-1][j]=="mine")
-			{
-				count++;
-			}
-			if(Bboard[i+1][j+1]=="mine")
-			{
-				count++;
-			}
-			if(Bboard[i+1][i-1]=="mine")
-			{
-				count++;
-			}
-			if(Bboard[i-1][j+1]=="mine")
-			{
-				count++;
-			}
-			if(Bboard[i-1][j-1]=="mine")
-			{
-				count++;
-			}
+      if(Row-1<m_row)
+      {
+        if
+      }
 		}
 	}
 return(count);
@@ -150,9 +125,10 @@ return(count);
 
 void Minesweeper::RecCheck(int Row, int Col)
 {
+  cout<<Check(Row,Col)<<endl;
 	if(Check(Row,Col)==0)
 	{
-		Uboard[Row][Col]=="[]";
+		Uboard[Row][Col]="[]";
 		RecCheck(Row-1,Col-1);
 		RecCheck(Row+1,Col+1);
 		RecCheck(Row+1,Col-1);
@@ -164,7 +140,7 @@ void Minesweeper::RecCheck(int Row, int Col)
 	}
 	else
 	{
-		Uboard[Row][Col]=Check(Row,Col);
+		Uboard[Row][Col]=to_string(Check(Row,Col));
 	}
 }
 
@@ -172,16 +148,16 @@ void Minesweeper::RecCheck(int Row, int Col)
 void Minesweeper::print()
 {
 	cout<<" ";
-	for(int k=1;k<=m_row; k++)
+	for(int k=0;k<m_row; k++)
 	{
 		cout<<k;
 	}
 	cout<<endl;
-	for(int i=1; i<=m_row; i++)
+	for(int i=0; i<m_row; i++)
 	{
 		cout<<i;
 	
-		for(int j=1; j<=m_col; j++)
+		for(int j=0; j<m_col; j++)
 		{
 			cout<<Uboard[i][j];
 		}
