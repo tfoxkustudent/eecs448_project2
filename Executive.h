@@ -1,6 +1,9 @@
 #ifndef EXECUTIVE_H
 #define EXECUTIVE_H
 #include "Minesweeper.h"
+#include <limits>
+#include <cstdlib>
+#include <stdlib.h>
 
 
 class Executive
