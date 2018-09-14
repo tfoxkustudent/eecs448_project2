@@ -9,13 +9,13 @@ Executive::Executive()
 }
 
 
-Executive::Executive(std::string row, std::string col, std::string numMines)
+Executive::Executive(int row, int col, int mines)
 {
 
 
-	m_row=std::stoi(row);
-	m_col=std::stoi(col);
-	m_mines=std::stoi(numMines);
+	m_row=row;
+	m_col=col;
+	m_mines=mines;
 
 
 }
@@ -145,7 +145,7 @@ void Executive::run()
 			
 			if(sweep.Revealing(row,col)==false)  //after forcing good input, calls Revealing and if it returns false, the user has selected a mine. The game ends
 			{
-				std::cout<<"Sorry.You lose!";
+				std::cout<<"Sorry.You lose!\n";
 				break;
 			}
 		}

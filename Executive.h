@@ -10,7 +10,7 @@ class Executive
 {
 	public:
 		Executive();
-		Executive(std::string row, std::string col, std::string numMines);
+		Executive(int row, int col, int mines);
 		void run();
 	private:
 		int m_row;
