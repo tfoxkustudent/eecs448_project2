@@ -33,7 +33,7 @@ void Executive::run()
 	while(true)
 	{
 		
-		sweep.print();
+		sweep.print(1);
 	
 		std::cout<<"Please make your selection:\n1)R(Reveal)\n2)F(Flag)\n3)U(Unflag)\n4)E(Exit)\n";
 		std::cin>>choice;
@@ -123,7 +123,7 @@ void Executive::run()
 
 
 
-			while(col>m_col || col<0)  //checks to see if col is in bounds
+			while(col>=m_col || col<0)  //checks to see if col is in bounds
 			{
 				std::cout<<"The column you provided is out of bounds. The max column you can select is "<< m_col-1<<"\nCol:";
 				std::cin>>col;
@@ -145,8 +145,27 @@ void Executive::run()
 			
 			if(sweep.Revealing(row,col)==false)  //after forcing good input, calls Revealing and if it returns false, the user has selected a mine. The game ends
 			{
-				std::cout<<"Sorry.You lose!\n";
-				break;
+
+				sweep.print(2);
+				
+				std::cout<<"Sorry.You lose!\n Do you want to play again? \n Type 'y' for 'yes' and 'n' for 'no'";
+				char playChoice='\0';
+				
+					std::cin>>playChoice;
+					playChoice=std::tolower(playChoice);
+					if(playChoice=='y')
+					{
+						sweep.Reset();
+					}
+					else
+					{
+						std::cout<<"Goodbye!\n";
+						break;
+					}
+
+				
+			
+				
 			}
 		}
 
@@ -237,8 +256,24 @@ void Executive::run()
 
 			if(sweep.Marking(row,col,1))    //after forcing good input, calls marking and if marking returns true, the user has flagged all the mines and won the game
 			{
-				std::cout<<"Congratulations!You win the game!\n";
-				break;
+				
+				sweep.print(2);
+				
+				std::cout<<"\n"<<"You win!\n Do you want to play again? \n Type 'y' for 'yes' and 'n' for 'no': ";
+				char playChoice='\0';
+				
+				std::cin>>playChoice;
+				playChoice=std::tolower(playChoice);
+				if(playChoice=='y')
+				{
+					sweep.Reset();
+				}
+				else
+				{
+					std::cout<<"Goodbye!\n";
+					
+					break;
+				}
 			}
 		}
 		
