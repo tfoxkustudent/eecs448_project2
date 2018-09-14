@@ -251,7 +251,7 @@ void Minesweeper::RecCheck(int Row, int Col)
 void Minesweeper::print(int option)
 {
   cout<<"------------------------------------------\n";
-	cout<<"    ";
+	cout<<"    ";//print the space part on the left corner.
 	for(int k=0;k<m_col; k++)
 	{
 		if(k<9)
@@ -280,7 +280,7 @@ void Minesweeper::print(int option)
     }
 		for(int j=0; j<m_col; j++)
 		{
-      if(option==2&&Bboard[i][j]=="M")
+      if(option==2&&Bboard[i][j]=="M")//Print mines when user lose the game.
 			{
         cout<<"M"<<"   ";
       }
