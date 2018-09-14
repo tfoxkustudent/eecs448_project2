@@ -8,4 +8,4 @@ Executive.o: Executive.h Executive.cpp
 	g++ -std=c++11 -g -Wall -c Executive.cpp
 
 clean:
-	rm *.o MineSweeper
+	rm *.o e1
