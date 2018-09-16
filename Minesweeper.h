@@ -12,16 +12,17 @@ private:
   int m_row;
   int m_col;
   int m_mines;
-  string** Uboard;
-  string** Bboard;
-
+  string** Uboard;// The board for user which will display everytime after user make moves.
+  string** Bboard;// The board to store the position of mines.
   int NumOfFlag;// The number of the right flags.
+
   /* 
    * @pre:  Bboard was successfully created.
    * @post: Set the mines on Bboard randomly.
-   * @param:Number of mines(int).
+   * @param:Null.
    */
-  void setMines(int mines);
+  void setMines();
+
   /* 
    * @pre:  A valid input position.
    * @post: If there are mines adjacent to the target position, set the position's
@@ -30,6 +31,7 @@ private:
    * @param:The target position's Row and Col(int).
    */
   void RecCheck(int Row, int Col);
+
   /* 
    * @pre:  A valid input position.
    * @post: If there are mines adjacent to the target position,
@@ -37,6 +39,7 @@ private:
    * @param:The target position's Row and Col(int).
    */
   int Check(int Row, int Col);
+
   
 
   
@@ -49,9 +52,15 @@ public:
    * @param:the target position's Row and Col(int).Number of mines the user want(int).
    */
   Minesweeper(int Row, int Col, int NumOfMines);
+
   ~Minesweeper();
 
-  void print();
+  /*
+   * @pre:  Null.
+   * @post: Print the Uboard
+   * @param:Null.
+   */
+  void print(int option);
 
   /*
    * @pre:  A valid input position.
@@ -60,17 +69,20 @@ public:
    * @param:the target position's Row and Col(int).
    */
   bool Revealing(int Row, int Col);
+
   /*
    * @pre:  A valid input position.
    * @post: Put the flag on the input position.
    * @param:the target position's Row and Col(int).
    */
-  bool Marking(int Row, int Col,int option);
-  /*
-   * @pre:  Null
-   * @post: Return the trigger letter.
-   * @param:Null
-   */
+  bool Marking(int Row, int Col,int option) throw(runtime_error);
 
+  /* 
+   * @pre:  Null.
+   * @post: Reset the Uboard and Bboard and the game start over.
+   * @param:Null.
+   */
+  void Reset();
+  
 };
 #endif
