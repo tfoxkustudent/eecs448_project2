@@ -15,6 +15,7 @@ private:
   string** Uboard;// The board for user which will display everytime after user make moves.
   string** Bboard;// The board to store the position of mines.
   int NumOfFlag;// The number of the right flags.
+  int GeneralFlag;//The number of the flags the user puts.
 
   /* 
    * @pre:  Bboard was successfully created.
@@ -65,17 +66,24 @@ public:
   /*
    * @pre:  A valid input position.
    * @post: Reveal the input position. If the position is a mine, the game is over.
-   *        Otherwise, run the rec_check method.
+   *        Otherwise, run the rec_check method.Throw exception when the spot is already revealed.
    * @param:the target position's Row and Col(int).
    */
-  bool Revealing(int Row, int Col);
+  bool Revealing(int Row, int Col) throw(runtime_error);
 
   /*
    * @pre:  A valid input position.
-   * @post: Put the flag on the input position.
+   * @post: Put the flag on the input position.Throw exception when the spot is not blank spot.
    * @param:the target position's Row and Col(int).
    */
-  bool Marking(int Row, int Col,int option) throw(runtime_error);
+  bool Marking(int Row, int Col) throw(runtime_error);
+  
+  /*
+   * @pre:  A valid input position.
+   * @post: Put the flag on the input position.Throw exception when the spot is not flaged.
+   * @param:the target position's Row and Col(int).
+   */
+  void unMarking(int Row, int Col) throw(runtime_error);
 
   /* 
    * @pre:  Null.

@@ -6,13 +6,13 @@
 class Executive
 {
 	public:
-		Executive();
+		//Executive();
 		/* 
 		* @pre:  Bboard was successfully created.
 		* @post: Taking in the numbers of Rows,Columns and Number of Mines.
 		* @param:Rows,Columns and Number of Mines(strings).
 		*/
-		Executive(std::string row, std::string col, std::string numMines);
+		Executive(int row, int col, int numMines);
 		//~Executive();
 		void run();
 	private:

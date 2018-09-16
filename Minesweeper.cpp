@@ -47,12 +47,11 @@ Minesweeper:: ~Minesweeper()
 }
 void Minesweeper::setMines()
 {
-
   int count=0; //use to set the number of mines
   while(count < m_mines)
   {
-    int tempRow = rand() % (m_row-1);
-    int tempCol = rand() % (m_col-1);
+    int tempRow = rand() % (m_row);
+    int tempCol = rand() % (m_col);
     //cout<<tempRow<<tempCol<<"\n";
     //set the mine is the block is blank, otherwise keep looping
     if(Bboard[tempRow][tempCol] == "■")
@@ -62,13 +61,11 @@ void Minesweeper::setMines()
     }
   }
 }
-bool Minesweeper::Marking(int Row, int Col, int option) throw(std::runtime_error)
+bool Minesweeper::Marking(int Row, int Col) throw (runtime_error)
 {
-  if(option==1)
-  {
     if(Uboard[Row][Col]!="■")
     {
-      throw(std::runtime_error("Cannot flag on non-blank block.\n"));
+      throw(runtime_error("Cannot flag on non-blank block.\n"));
     }
     else
     {  
@@ -76,9 +73,10 @@ bool Minesweeper::Marking(int Row, int Col, int option) throw(std::runtime_error
       if(Bboard[Row][Col]=="M")
       {
         NumOfFlag++;
-        if(NumOfFlag==m_mines)
+        GeneralFlag++;
+        if(NumOfFlag==m_mines&&GeneralFlag==m_mines)
         {
-        return(true);//Condition1:set all the flags on the correct mines. 
+          return(true);//Condition1:set all the flags on the correct mines. 
         }
         else
         {
@@ -87,32 +85,46 @@ bool Minesweeper::Marking(int Row, int Col, int option) throw(std::runtime_error
       }
       else
       {
+        GeneralFlag++;
         return(false);//Condition3:set one flag on the wrong position.
       }
     }
-  }
-  else//unflag function
-  {
-    Uboard[Row][Col] = "U";
-    if(Bboard[Row][Col]=="M")
-    {
-      NumOfFlag--;
-    }
-    return(false);
-  }
+} 
   
-}
-bool Minesweeper::Revealing(int Row, int Col)
+void Minesweeper::unMarking(int Row,int Col) throw(runtime_error)
 {
-  if(Bboard[Row][Col]=="M")
+  if((Uboard[Row][Col]!="F"))
   {
-    return(false);
+    throw(runtime_error("Cannot unflag the spot without flag.\n"));
   }
   else
   {
-    RecCheck(Row, Col);
-    return(true);
-  }  
+    if(Bboard[Row][Col]=="M")
+    {
+      NumOfFlag--;
+      GeneralFlag--;
+      Uboard[Row][Col]="■";
+    }
+  }
+}
+bool Minesweeper::Revealing(int Row, int Col) throw(runtime_error)
+{
+  if(Bboard[Row][Col]!="■")
+  {
+    throw(runtime_error("Cannot reveal this spot\n"));
+  }
+  else
+  {
+    if(Bboard[Row][Col]=="M")
+    {
+      return(false);
+    }
+    else
+    {
+      RecCheck(Row, Col);
+      return(true);
+    }  
+  }
 }
 
 
