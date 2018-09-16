@@ -11,12 +11,12 @@
 #include "Executive.h"
 
 
-Executive::Executive()
-{
-	m_row=0;
-	m_col=0;
-	m_mines=0;
-}
+// Executive::Executive()
+// {
+// 	m_row=0;
+// 	m_col=0;
+// 	m_mines=0;
+// }
 
 
 Executive::Executive(int row, int col, int mines)
@@ -33,17 +33,20 @@ Executive::Executive(int row, int col, int mines)
 
 void Executive::run()
 {
+	
 	std::cout<<"Welcome to Minesweeper!\n";
 	Minesweeper sweep(m_row, m_col, m_mines);
 	int row=0;
 	int col=0;
 	std::string choice="";
+	
 	while(true)
 	{
 
+		
 		sweep.print(1);
-		std::cout<<"1)Reveal\n2)Flag\n3)Unflag\n4)Reset\n5)Exit\nPlease make your selection(Enter numbers only):";
-
+	
+		std::cout<<"Please make your selection:\n1)R(Reveal)\n2)F(Flag)\n3)U(Unflag)\n4)E(Exit)\n";
 		std::cin>>choice;
 
 		while(std::cin.fail()) //failbit
@@ -54,7 +57,6 @@ void Executive::run()
 			std::cin>>choice;
 			std::cout<<endl;
 		}
-
 		
 		while(choice!="r" && choice != "R" && choice != "f" && choice!= "F" && choice != "e" && choice != "E" && choice != "u" && choice != "U")
 		{
@@ -68,16 +70,17 @@ void Executive::run()
 
 
 		if(choice=="E")
-
 		{
-			break;//Break the loop and end the game.
+			break;
 		}
+
 
 
 
 /*---------------------------------------------------------------------------------Revealing----------------------------------------------------------------------------------------------*/
 		else if(choice=="R")   //Reveal
 		{
+			
 			std::cout<<"Please enter your row:";
 			std::cin>>row;
 
@@ -189,13 +192,14 @@ void Executive::run()
 			while(Markingflag!=true)
 			{
 
+
 			try
 			{
 			std::cout<<"Please enter your row:";
 			std::cin>>row;
 			std::cout<<"Please enter your column:";
 			std::cin>>col;
-			if(sweep.Marking(row,col,1))
+			if(sweep.Marking(row,col))
 			{
 			std::cout<<"Congratulations!You win the game!\n";
 			std::cout<<"Do you want to play again?(Yes(Y/y) or No(N/n)):";
@@ -233,11 +237,8 @@ void Executive::run()
 			{
 			std::cout<<e.what();
 			}
-
 			}
-
 		}
-	
 		
 /*-------------------------------------------------------------------------------------------UnFlagging-----------------------------------------------------------------------------------------------*/
 
@@ -288,7 +289,6 @@ void Executive::run()
 
 
 
-
 			while(std::cin.fail())   //failbit
 			{
 				std::cin.clear();
@@ -320,11 +320,9 @@ void Executive::run()
 
 				
 			}
-			sweep.Marking(row,col,2);	//call flagging method after good input is enforced
+			sweep.Marking(row,col);	//call flagging method after good input is enforced
 		}
 		
 		
 	}
-
-
 }

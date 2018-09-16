@@ -59,6 +59,7 @@ private:
  * privately stores the number of flags
 **/
   int NumOfFlag;// The number of the right flags.
+  int GeneralFlag;//The number of the flags the user puts.
 
 /**
  * @brief Sets the mines on the randomly using the selected number of mines.
@@ -130,25 +131,27 @@ public:
 **/
   void print(int option);
 
-/**
- * @brief Revealing checks if the selected spot is a mine and returns false if true, otherwise it calls RecCheck and returns true.
- * @pre  A valid input position.
- * @post Reveal the input position. If the position is a mine, the game is over. Otherwise, run the rec_check method.
- * @param row target position's row (int).
- * @param col target position's column (int).
-**/
-  bool Revealing(int Row, int Col);
+  /*
+   * @pre:  A valid input position.
+   * @post: Reveal the input position. If the position is a mine, the game is over.
+   *        Otherwise, run the rec_check method.Throw exception when the spot is already revealed.
+   * @param:the target position's Row and Col(int).
+   */
+  bool Revealing(int Row, int Col) throw(runtime_error);
 
-/**
- * @brief Marking is the flagging/unflagging function.  
- * @pre  A valid input position.
- * @post Put the flag on the input position.
- * @param row target position's row (int).
- * @param col target position's column (int).
- * @param option determines if user has correctly flagged a mine or not (int)
-**/
-  bool Marking(int Row, int Col,int option) throw(runtime_error);
-
+  /*
+   * @pre:  A valid input position.
+   * @post: Put the flag on the input position.Throw exception when the spot is not blank spot.
+   * @param:the target position's Row and Col(int).
+   */
+  bool Marking(int Row, int Col) throw(runtime_error);
+  
+  /*
+   * @pre:  A valid input position.
+   * @post: Put the flag on the input position.Throw exception when the spot is not flaged.
+   * @param:the target position's Row and Col(int).
+   */
+  void unMarking(int Row, int Col) throw(runtime_error);
 /** 
  * @brief Reset creates a new board with the same dimensions but randomizes the placement of the mines.
  * @pre  Null.

@@ -41,7 +41,6 @@ int main(int argc, char* argv[])
 		}			//end failbit
 
 
-
 		
 		while(row<2|| row>40)   //checks to see if row is in bounds
 		{

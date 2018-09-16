@@ -42,9 +42,6 @@ class Executive
  * @post game over
 **/
 void run();
-	
-
-
 
 	private:
 
