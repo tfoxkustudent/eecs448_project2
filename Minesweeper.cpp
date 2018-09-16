@@ -72,10 +72,11 @@ void Minesweeper::setMines()
 {
 
   int count=0; //use to set the number of mines
+  srand (time(NULL));
   while(count < m_mines)
   {
-    int tempRow = rand() % (m_row-1);
-    int tempCol = rand() % (m_col-1);
+    int tempRow = rand() % (m_row);
+    int tempCol = rand() % (m_col);
     //cout<<tempRow<<tempCol<<"\n";
     //set the mine is the block is blank, otherwise keep looping
     if(Bboard[tempRow][tempCol] == "■")

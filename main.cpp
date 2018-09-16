@@ -1,3 +1,11 @@
+/** 
+ * @author Team FourFour8
+ * @file main.cpp
+ * @date September 2018
+ * @brief main. handles initial i/o and gives control off to exec
+**/
+
+
 #include "Executive.h"
 #include <time.h>
 
@@ -34,7 +42,7 @@ int main(int argc, char* argv[])
 
 
 		
-		while(row<=2|| row>40)   //checks to see if row is in bounds
+		while(row<2|| row>40)   //checks to see if row is in bounds
 		{
 			std::cout<<"The number of rows you provided is out of bounds. The lower bound is 2 and the upper bound is 4.\n Enter # of rows: ";
 			std::cin>>row;
@@ -65,8 +73,8 @@ int main(int argc, char* argv[])
 		{
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout<<"Please enter a number!\n Row:";
-			std::cin>>row;
+			std::cout<<"Please enter a number!\n Col:";
+			std::cin>>col;
 			std::cout<<endl;
 		}			//end failbit
 
@@ -76,7 +84,7 @@ int main(int argc, char* argv[])
 		while(col<2|| col>40)   //checks to see if row is in bounds
 		{
 			std::cout<<"The number of columns you provided is out of bounds. The lower bound is 2 and the upper bound is 4.\n Enter # of columns: ";
-			std::cin>>row;
+			std::cin>>col;
 
 
 
@@ -85,7 +93,7 @@ int main(int argc, char* argv[])
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				std::cout<<"Please enter a number!\n Row:";
-				std::cin>>row;
+				std::cin>>col;
 				std::cout<<endl;
 			}			//end failbit
 
@@ -95,7 +103,7 @@ int main(int argc, char* argv[])
 		}
 
 
-	maxMines=row*col;
+	maxMines=(row*col)-1;
 
 	std::cout<<"Enter the number of mines you would like: ";
 	std::cin>>mines;
@@ -105,15 +113,15 @@ int main(int argc, char* argv[])
 	{
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout<<"Please enter a number!\n Row:";
-		std::cin>>row;
+		std::cout<<"Please enter a number!\n Mines:";
+		std::cin>>mines;
 		std::cout<<endl;
 	}			//end failbit
 
 
 
 		
-	while(mines<=0|| mines>maxMines)   //checks to see if row is in bounds
+	while(mines<1 || mines>maxMines)   //checks to see if row is in bounds
 	{
 		std::cout<<"The number of mines you provided is out of bounds. The lower bound is 1 and the upper bound is "<<maxMines<<"\n Enter # of mines: ";
 		std::cin>>mines;
@@ -124,8 +132,8 @@ int main(int argc, char* argv[])
 		{
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout<<"Please enter a number!\n Row:";
-			std::cin>>row;
+			std::cout<<"Please enter a number!\n Mines:";
+			std::cin>>mines;
 			std::cout<<endl;
 		}			//end failbit
 
