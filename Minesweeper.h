@@ -112,6 +112,8 @@ public:
   Minesweeper(int Row, int Col, int NumOfMines);
 
 
+
+
 /**
  * @pre  Null.
  * @post destroys board and clears memory
@@ -123,6 +125,7 @@ public:
  * @pre  Null.
  * @post Print the Uboard
  * @param Null.
+
 
 **/
   void print(int option);
@@ -152,6 +155,7 @@ public:
  * @post Reset the Uboard and Bboard and the game start over.
  * @param Null.
 **/
+
   void Reset();
   
 };

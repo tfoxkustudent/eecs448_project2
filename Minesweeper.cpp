@@ -63,15 +63,18 @@ Minesweeper:: ~Minesweeper()
   }
   delete[] Bboard;
 }
+
 //end Destructor
 
 
 
 /*-------------------------------------------------------------------------------------------------setMines-----------------------------------------------------------------------------------*/
+
 void Minesweeper::setMines()
 {
 
   int count=0; //use to set the number of mines
+
   srand (time(NULL));
   while(count < m_mines)
   {
@@ -86,10 +89,12 @@ void Minesweeper::setMines()
     }
   }
 }
+
 //end setMines
 
 
 /*-------------------------------------------------------------------------------------------------Marking-----------------------------------------------------------------------------------*/
+
 bool Minesweeper::Marking(int Row, int Col, int option) throw(std::runtime_error)
 {
   if(option==1)
@@ -288,6 +293,7 @@ void Minesweeper::RecCheck(int Row, int Col)
 //end RecCheck
 
 
+
 /*-------------------------------------------------------------------------------------------------print-----------------------------------------------------------------------------------*/
 void Minesweeper::print(int option)
 {
@@ -307,6 +313,7 @@ void Minesweeper::print(int option)
     		{
       			cout<<k<<"  ";
     		}
+
 	}
 	
 
@@ -315,6 +322,7 @@ void Minesweeper::print(int option)
 
 	for(int i=0; i<m_row; i++)
 	{
+
     		if(i<10)
     		{
      			 cout<<i<<"   ";
@@ -337,6 +345,7 @@ void Minesweeper::print(int option)
 		cout<<"\n";
 	}
 	cout<<"------------------------------------------\n";
+
 
 }
 //end print
