@@ -1,3 +1,13 @@
+/** 
+ * @author Team FourFour8
+ * @file Executive.cpp
+ * @date September 2018
+ * @brief Executive implementation file 
+**/
+
+
+
+
 #include "Executive.h"
 
 
@@ -9,13 +19,13 @@ Executive::Executive()
 }
 
 
-Executive::Executive(std::string row, std::string col, std::string numMines)
+Executive::Executive(int row, int col, int mines)
 {
 
 
-	m_row=std::stoi(row);
-	m_col=std::stoi(col);
-	m_mines=std::stoi(numMines);
+	m_row=row;
+	m_col=col;
+	m_mines=mines;
 
 
 }
@@ -30,113 +40,291 @@ void Executive::run()
 	std::string choice="";
 	while(true)
 	{
+
 		sweep.print(1);
 		std::cout<<"1)Reveal\n2)Flag\n3)Unflag\n4)Reset\n5)Exit\nPlease make your selection(Enter numbers only):";
+
 		std::cin>>choice;
-		int length=choice.size();
-		for(int i=0;i<length;i++)
+
+		while(std::cin.fail()) //failbit
 		{
-			std::tolower(choice[i]);
+			std::cin.clear();
+			std::cin.ignore();
+			std::cout<<"Please provide a valid entry!\n"<<"Please make your selection:\n1)R(Reveal)\n2)F(Flag)\n3)U(Unflag)\n4)E(Exit)\n";
+			std::cin>>choice;
+			std::cout<<endl;
 		}
-		if(choice=="5")//Choose to exit;
+
+		
+		while(choice!="r" && choice != "R" && choice != "f" && choice!= "F" && choice != "e" && choice != "E" && choice != "u" && choice != "U")
+		{
+			std::cout<<"Provide a valid move: ";
+			std::cin>>choice;
+			std::cout<<"\n";
+		}
+		choice=std::toupper(choice[0]);
+
+/*---------------------------------------------------------------------------------Exit--------------------------------------------------------------------------------------------------*/
+
+
+		if(choice=="E")
+
 		{
 			break;//Break the loop and end the game.
 		}
-		else if(choice=="1")//Choose to reveal 
+
+
+
+/*---------------------------------------------------------------------------------Revealing----------------------------------------------------------------------------------------------*/
+		else if(choice=="R")   //Reveal
 		{
 			std::cout<<"Please enter your row:";
 			std::cin>>row;
+
+
+
+			while(std::cin.fail()) //failbit
+			{
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::cout<<"Please enter a number!\n Row:";
+				std::cin>>row;
+				std::cout<<endl;
+			}			//end failbit
+
+
+
+		
+			while(row>m_row || row<0)   //checks to see if row is in bounds
+			{
+				std::cout<<"The row you provided is out of bounds. The max row you can select is "<< m_row-1<<"\n Row:";
+				std::cin>>row;
+
+
+
+				while(std::cin.fail()) //failbit
+				{
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					std::cout<<"Please enter a number!\n Row:";
+					std::cin>>row;
+					std::cout<<endl;
+				}			//end failbit
+
+
+
+
+			}
 			std::cout<<"Please enter your column:";
 			std::cin>>col;
-			if(sweep.Revealing(row,col)==false)//The cricumstance that user click on the mine. Revealing returned a false.
+
+
+
+
+			while(std::cin.fail())   //failbit
 			{
-				
-				sweep.print(2);//print the board with mines on it.
-				std::cout<<"Sorry.You lose!\n";
-				std::cout<<"Do you want to play again?(Yes(Y/y) or No(N/n)):";
-				char playchoice=' ';
-				while(true)// infinite loop to take right choice.
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::cout<<"Please enter a number!\n Col:";
+				std::cin>>col;
+				std::cout<<endl;
+			}			//end failbit
+
+
+
+			while(col>=m_col || col<0)  //checks to see if col is in bounds
+			{
+				std::cout<<"The column you provided is out of bounds. The max column you can select is "<< m_col-1<<"\nCol:";
+				std::cin>>col;
+
+
+
+				while(std::cin.fail()) //failbit
 				{
-					std::cin>>playchoice;
-					if(playchoice=='Y' || playchoice=='y' || playchoice=='N' || playchoice=='n')
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					std::cout<<"Please enter a number!\n Col:";
+					std::cin>>col;
+					std::cout<<endl;
+				}			//end failbit
+
+
+
+			}
+			
+			if(sweep.Revealing(row,col)==false)  //after forcing good input, calls Revealing and if it returns false, the user has selected a mine. The game ends
+			{
+
+				sweep.print(2);
+				
+				std::cout<<"Sorry.You lose!\n Do you want to play again? \n Type 'y' for 'yes' and 'n' for 'no'";
+				char playChoice='\0';
+				
+					std::cin>>playChoice;
+					playChoice=std::tolower(playChoice);
+					if(playChoice=='y')
 					{
-						break;//end the loop until get the right choice.
+						sweep.Reset();
 					}
 					else
 					{
-						std::cout<<"Please enter right choice(Only Y/y or N/n).\n";
+						std::cout<<"Goodbye!\n";
+						break;
 					}
-			    }
-				if(playchoice=='Y' || playchoice=='y')
-				{
-					sweep.Reset();
-				}
-				else
-				{
-					std::cout<<"Goodbye!\n";
-					break;
-				}
+
+				
+			
+				
 			}
 		}
-		else if(choice=="2")//Chose to flag
+
+
+/*-------------------------------------------------------------------------------Flagging----------------------------------------------------------------------------------------------------*/
+
+
+		else if(choice=="F")  //Flag
 		{
 			bool Markingflag=false;
 			char playchoice=' ';
 			while(Markingflag!=true)
 			{
-				try
-				{
-					std::cout<<"Please enter your row:";
-					std::cin>>row;
-					std::cout<<"Please enter your column:";
-					std::cin>>col;
-					if(sweep.Marking(row,col,1))
-					{
-						std::cout<<"Congratulations!You win the game!\n";
-						std::cout<<"Do you want to play again?(Yes(Y/y) or No(N/n)):";
-						
-						while(true)
-						{
-							std::cin>>playchoice;
-							if(playchoice=='Y' || playchoice=='y' || playchoice=='N' || playchoice=='n')
-							{
-							break;
-							}
-							else
-							{
-							std::cout<<"Please enter right choice(Only Y/y or N/n).\n";
-							}
-						}
-						Markingflag=true;
-					}
-			    }
-				catch(std::runtime_error &e)
-				{
-					std::cout<<e.what();
-				}
-			}
-			if(playchoice=='Y' || playchoice=='y')
-			{
-				sweep.Reset();
-			}
-			else
-			{
-				std::cout<<"Goodbye!\n";
-				break;
-			}
 
-		}
-		else if(choice=="3")
-		{
+			try
+			{
 			std::cout<<"Please enter your row:";
 			std::cin>>row;
 			std::cout<<"Please enter your column:";
 			std::cin>>col;
-			sweep.Marking(row,col,2);//Marking function with option=2 is for unflaging.
-		}
-		else if(choice=="4")
-		{
+			if(sweep.Marking(row,col,1))
+			{
+			std::cout<<"Congratulations!You win the game!\n";
+			std::cout<<"Do you want to play again?(Yes(Y/y) or No(N/n)):";
+
+			while(true)
+			{
+			std::cin>>playchoice;
+			if(playchoice=='Y' || playchoice=='y' || playchoice=='N' || playchoice=='n')
+			{
+			break;
+			}
+			else
+			{
+			std::cout<<"Please enter right choice(Only Y/y or N/n).\n";
+			}
+			if(playchoice=='Y' || playchoice=='y')
+			{
 			sweep.Reset();
+
+			}
+			else
+			{
+			std::cout<<"Goodbye!\n";
+			break;
+			}
+			}
+			Markingflag=true;
+			}
+			else
+			{
+			break;
+			}
+			}
+			catch(std::runtime_error &e)
+			{
+			std::cout<<e.what();
+			}
+
+			}
+
 		}
+	
+		
+/*-------------------------------------------------------------------------------------------UnFlagging-----------------------------------------------------------------------------------------------*/
+
+
+		else if(choice=="U")  //Unflag
+		{
+			std::cout<<"Please enter your row:";
+			std::cin>>row;
+
+
+
+
+			while(std::cin.fail()) //failbit
+			{
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::cout<<"Please enter a number!\n Row:";
+				std::cin>>row;
+				std::cout<<endl;
+			}			//end failbit
+	
+
+
+
+
+			while(row>m_row || row<0)   //checks to see if row is in bounds
+			{
+				std::cout<<"The row you provided is out of bounds. The max row you can select is "<< m_row-1<<"\n Row:";
+				std::cin>>row;
+
+
+				
+				while(std::cin.fail()) //failbit
+				{
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					std::cout<<"Please enter a number!\n Row:";
+					std::cin>>row;
+					std::cout<<endl;
+				}			//end failbit
+
+
+
+			}
+			std::cout<<"Please enter your column:";
+			std::cin>>col;
+
+
+
+
+
+			while(std::cin.fail())   //failbit
+			{
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::cout<<"Please enter a number!\n Col:";
+				std::cin>>col;
+				std::cout<<endl;
+			}			//end failbit
+			
+
+
+
+			while(col>m_col || col<0)   //checks to see if col is in bounds
+			{
+				std::cout<<"The column you provided is out of bounds. The max column you can select is "<< m_col-1<<"\nCol:";
+				std::cin>>col;
+
+
+				
+				while(std::cin.fail()) //failbit
+				{
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					std::cout<<"Please enter a number!\n Col:";
+					std::cin>>col;
+					std::cout<<endl;
+				}			//end failbit
+
+
+				
+			}
+			sweep.Marking(row,col,2);	//call flagging method after good input is enforced
+		}
+		
+		
 	}
+
+
 }
