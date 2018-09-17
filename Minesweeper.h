@@ -130,26 +130,31 @@ public:
 **/
   void print(int option);
 
-  /*
-   * @pre:  A valid input position.
-   * @post: Reveal the input position. If the position is a mine, the game is over.
-   *        Otherwise, run the rec_check method.Throw exception when the spot is already revealed.
-   * @param:the target position's Row and Col(int).
-   */
+   /**
+   * @brief unMarking is the function that deals with revealing
+   * @pre  A valid input position.
+   * @post spot and potentially the spots around it are revealed. Game ends if spot is a mine
+   * @param row the target position's Row (int)
+   * @param col the target position's column (int)
+   **/
   bool Revealing(int Row, int Col) throw(runtime_error);
 
-  /*
-   * @pre:  A valid input position.
-   * @post: Put the flag on the input position.Throw exception when the spot is not blank spot.
-   * @param:the target position's Row and Col(int).
-   */
+    /**
+   * @brief Marking is the function that deals with flagging
+   * @pre  A valid input position.
+   * @post spot is flagged
+   * @param row the target position's Row (int)
+   * @param col the target position's column (int)
+   **/
   bool Marking(int Row, int Col) throw(runtime_error);
   
-  /*
-   * @pre:  A valid input position.
-   * @post: Put the flag on the input position.Throw exception when the spot is not flaged.
-   * @param:the target position's Row and Col(int).
-   */
+  /**
+   * @brief unMarking is the function that deals with unflagging
+   * @pre  A valid input position.
+   * @post spot is unflagged
+   * @param row the target position's Row (int)
+   * @param col the target position's column (int)
+   **/
   void unMarking(int Row, int Col) throw(runtime_error);
 /** 
  * @brief Reset creates a new board with the same dimensions but randomizes the placement of the mines.
