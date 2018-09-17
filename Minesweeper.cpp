@@ -102,8 +102,7 @@ bool Minesweeper::Marking(int Row, int Col) throw (runtime_error)
       if(Bboard[Row][Col]=="M")
       {
         NumOfFlag++;
-        GeneralFlag++;
-        if(NumOfFlag==m_mines&&GeneralFlag==m_mines)
+        if(NumOfFlag==m_mines)
         {
           return(true);//Condition1:set all the flags on the correct mines. 
         }
@@ -114,7 +113,6 @@ bool Minesweeper::Marking(int Row, int Col) throw (runtime_error)
       }
       else
       {
-        GeneralFlag++;
         return(false);//Condition3:set one flag on the wrong position.
       }
     }
@@ -135,9 +133,8 @@ void Minesweeper::unMarking(int Row,int Col) throw(runtime_error)
     if(Bboard[Row][Col]=="M")
     {
       NumOfFlag--;
-      GeneralFlag--;
-      Uboard[Row][Col]="■";
     }
+    Uboard[Row][Col]="■";
   }
 }
 //end unMarking

@@ -59,7 +59,6 @@ private:
  * privately stores the number of flags
 **/
   int NumOfFlag;// The number of the right flags.
-  int GeneralFlag;//The number of the flags the user puts.
 
 /**
  * @brief Sets the mines on the randomly using the selected number of mines.
