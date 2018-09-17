@@ -17,7 +17,6 @@ class Executive
 {
 	public:
 
-
 /**
  * @brief Executive default constructor
  * @pre  none
@@ -43,8 +42,6 @@ class Executive
  * @post game over
 **/
 void run();
-	
-
 
 	private:
 

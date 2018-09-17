@@ -1,3 +1,4 @@
+
 /** 
  * @author Team FourFour8
  * @file main.cpp
@@ -38,7 +39,6 @@ int main(int argc, char* argv[])
 			std::cin>>row;
 			std::cout<<endl;
 		}			//end failbit
-
 
 
 		
@@ -152,3 +152,4 @@ int main(int argc, char* argv[])
 	
 return(0);
 }
+
