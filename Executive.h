@@ -47,6 +47,7 @@ void run();
 
 
 
+
 /**
  * an integer
  * privately stores the number of rows
@@ -67,6 +68,11 @@ int m_col;
 **/
 int m_mines;
 
+/**
+ * an integer
+ * privately stores the number of flags
+**/
+int m_flag;
 
 };
 #endif
