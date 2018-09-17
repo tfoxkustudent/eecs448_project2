@@ -65,7 +65,7 @@ bool Minesweeper::Marking(int Row, int Col) throw (runtime_error)
 {
     if(Uboard[Row][Col]!="■")
     {
-      throw(runtime_error("Cannot flag on non-blank block.\n"));
+      throw(runtime_error("\n-----Cannot flag on non-blank block.-----\n"));
     }
     else
     {  
@@ -95,7 +95,7 @@ void Minesweeper::unMarking(int Row,int Col) throw(runtime_error)
 {
   if((Uboard[Row][Col]!="F"))
   {
-    throw(runtime_error("Cannot unflag the spot without flag.\n"));
+    throw(runtime_error("\n-----Cannot unflag the spot without flag.-----\n"));
   }
   else
   {
@@ -109,9 +109,9 @@ void Minesweeper::unMarking(int Row,int Col) throw(runtime_error)
 }
 bool Minesweeper::Revealing(int Row, int Col) throw(runtime_error)
 {
-  if(Bboard[Row][Col]!="■")
+  if(Uboard[Row][Col]!="■")
   {
-    throw(runtime_error("Cannot reveal this spot\n"));
+    throw(runtime_error("\n-----Cannot reveal this spot.-----\n"));
   }
   else
   {

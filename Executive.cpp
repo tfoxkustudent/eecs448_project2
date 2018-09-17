@@ -152,31 +152,45 @@ void Executive::run()
 
 
 			}
-			
-			if(sweep.Revealing(row,col)==false)  //after forcing good input, calls Revealing and if it returns false, the user has selected a mine. The game ends
+			try
 			{
-
-				sweep.print(2);
-				
-				std::cout<<"Sorry.You lose!\n Do you want to play again? \n Type 'y' for 'yes' and 'n' for 'no'";
-				char playChoice='\0';
-				
+				if(sweep.Revealing(row,col)==false)  //after forcing good input, calls Revealing and if it returns false, the user has selected a mine. The game ends
+                {
+					sweep.print(2);
+					std::cout<<"Sorry.You lose!\n Do you want to play again? \n Type 'y' for 'yes' and 'n' for 'no'";
+					char playChoice='\0';
 					std::cin>>playChoice;
 					playChoice=std::tolower(playChoice);
-					if(playChoice=='y')
+					std::cout<<"Congratulations!You win the game!\n";
+					std::cout<<"Do you want to play again?(Yes(Y/y) or No(N/n)):";
+					while(true)//loop to get the write answer.
 					{
-						sweep.Reset();
+						std::cin>>playChoice;
+						if(playChoice=='Y' || playChoice=='y' || playChoice=='N' || playChoice=='n')
+						{
+						    break;
+						}
+						else
+						{
+				    		std::cout<<"Please enter right choice(Only Y/y or N/n).\n";
+						}
+					}
+					if(playChoice=='Y' || playChoice=='y')
+					{
+					    sweep.Reset();//Reset the board.
 					}
 					else
 					{
-						std::cout<<"Goodbye!\n";
+						std::cout<<"Goodbye!\n";//End the game.
 						break;
 					}
-
-				
-			
-				
+				}
 			}
+			catch(std::runtime_error &e)
+			{
+				std::cout<<e.what();
+			}
+				
 		}
 
 
@@ -185,55 +199,44 @@ void Executive::run()
 
 		else if(choice=="F")  //Flag
 		{
-			bool Markingflag=false;
 			char playchoice=' ';
-			while(Markingflag!=true)
-			{
 			try
-			{
-			std::cout<<"Please enter your row:";
-			std::cin>>row;
-			std::cout<<"Please enter your column:";
-			std::cin>>col;
-			if(sweep.Marking(row,col))
-			{
-			std::cout<<"Congratulations!You win the game!\n";
-			std::cout<<"Do you want to play again?(Yes(Y/y) or No(N/n)):";
-
-			while(true)
-			{
-			std::cin>>playchoice;
-			if(playchoice=='Y' || playchoice=='y' || playchoice=='N' || playchoice=='n')
-			{
-			break;
-			}
-			else
-			{
-			std::cout<<"Please enter right choice(Only Y/y or N/n).\n";
-			}
-			if(playchoice=='Y' || playchoice=='y')
-			{
-			sweep.Reset();
-
-			}
-			else
-			{
-			std::cout<<"Goodbye!\n";
-			break;
-			}
-			}
-			Markingflag=true;
-			}
-			else
-			{
-			break;
-			}
-			}
-			catch(std::runtime_error &e)
-			{
-			std::cout<<e.what();
-			}
-			}
+				{
+					std::cout<<"Please enter your row:";
+					std::cin>>row;
+					std::cout<<"Please enter your column:";
+					std::cin>>col;
+					if(sweep.Marking(row,col))//Condition1: user win.
+					{
+						std::cout<<"Congratulations!You win the game!\n";
+						std::cout<<"Do you want to play again?(Yes(Y/y) or No(N/n)):";
+						while(true)//loop to get the write answer.
+						{
+							std::cin>>playchoice;
+							if(playchoice=='Y' || playchoice=='y' || playchoice=='N' || playchoice=='n')
+							{
+								break;
+							}
+							else
+							{
+								std::cout<<"Please enter right choice(Only Y/y or N/n).\n";
+							}
+						}
+						if(playchoice=='Y' || playchoice=='y')
+						{
+							sweep.Reset();//Reset the board.
+						}
+						else
+						{
+							std::cout<<"Goodbye!\n";//End the game.
+							break;
+						}
+					}
+				}
+				catch(std::runtime_error &e)
+				{
+					std::cout<<e.what();
+				}
 		}
 		
 /*-------------------------------------------------------------------------------------------UnFlagging-----------------------------------------------------------------------------------------------*/
@@ -316,7 +319,14 @@ void Executive::run()
 
 				
 			}
-			sweep.Marking(row,col);	//call flagging method after good input is enforced
+			try
+			{
+				sweep.unMarking(row,col);	//call flagging method after good input is enforced
+			}
+			catch(std::runtime_error &e)
+			{
+				std::cout<<e.what();
+			}
 		}
 		
 		
