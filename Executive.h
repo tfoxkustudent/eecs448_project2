@@ -19,5 +19,6 @@ class Executive
 		int m_row;
 		int m_col;
 		int m_mines;
+		int m_flag;
 };
 #endif

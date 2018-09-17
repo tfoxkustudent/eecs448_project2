@@ -26,7 +26,7 @@ Executive::Executive(int row, int col, int mines)
 	m_row=row;
 	m_col=col;
 	m_mines=mines;
-
+	m_flag=0;
 
 }
 
@@ -46,6 +46,7 @@ void Executive::run()
 		sweep.print(1);
 	
 		std::cout<<"Please make your selection:\n1)R(Reveal)\n2)F(Flag)\n3)U(Unflag)\n4)E(Exit)\n";
+		std::cout<<"You have "<<(m_mines-m_flag)<<" flag(s) can be used.\n";
 		std::cin>>choice;
 
 		while(std::cin.fail()) //failbit
@@ -199,13 +200,20 @@ void Executive::run()
 
 		else if(choice=="F")  //Flag
 		{
-			char playchoice=' ';
-			try
+			if(m_flag>=m_mines)
+			{
+				std::cout<<"\n-----Sorry.You cannot flag more than the number of mines.-----\n";
+			}
+			else
+			{
+				char playchoice=' ';
+				try
 				{
 					std::cout<<"Please enter your row:";
 					std::cin>>row;
 					std::cout<<"Please enter your column:";
 					std::cin>>col;
+					m_flag++;
 					if(sweep.Marking(row,col))//Condition1: user win.
 					{
 						std::cout<<"Congratulations!You win the game!\n";
@@ -231,13 +239,15 @@ void Executive::run()
 							std::cout<<"Goodbye!\n";//End the game.
 							break;
 						}
-					}
+				    }
 				}
 				catch(std::runtime_error &e)
 				{
 					std::cout<<e.what();
 				}
+		    }
 		}
+
 		
 /*-------------------------------------------------------------------------------------------UnFlagging-----------------------------------------------------------------------------------------------*/
 
@@ -322,6 +332,7 @@ void Executive::run()
 			try
 			{
 				sweep.unMarking(row,col);	//call flagging method after good input is enforced
+				m_flag--;
 			}
 			catch(std::runtime_error &e)
 			{

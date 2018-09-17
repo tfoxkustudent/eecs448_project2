@@ -15,7 +15,6 @@ private:
   string** Uboard;// The board for user which will display everytime after user make moves.
   string** Bboard;// The board to store the position of mines.
   int NumOfFlag;// The number of the right flags.
-  int GeneralFlag;//The number of the flags the user puts.
 
   /* 
    * @pre:  Bboard was successfully created.
