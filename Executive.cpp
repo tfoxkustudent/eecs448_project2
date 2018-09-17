@@ -11,12 +11,12 @@
 #include "Executive.h"
 
 
-Executive::Executive()
-{
-	m_row=0;
-	m_col=0;
-	m_mines=0;
-}
+// Executive::Executive()
+// {
+// 	m_row=0;
+// 	m_col=0;
+// 	m_mines=0;
+// }
 
 
 Executive::Executive(int row, int col, int mines)
@@ -42,6 +42,7 @@ void Executive::run()
 	
 	while(true)
 	{
+
 		
 		sweep.print(1);
 	
@@ -72,6 +73,7 @@ void Executive::run()
 		{
 			break;
 		}
+
 
 
 
@@ -189,13 +191,15 @@ void Executive::run()
 			char playchoice=' ';
 			while(Markingflag!=true)
 			{
+
+
 			try
 			{
 			std::cout<<"Please enter your row:";
 			std::cin>>row;
 			std::cout<<"Please enter your column:";
 			std::cin>>col;
-			if(sweep.Marking(row,col,1))
+			if(sweep.Marking(row,col))
 			{
 			std::cout<<"Congratulations!You win the game!\n";
 			std::cout<<"Do you want to play again?(Yes(Y/y) or No(N/n)):";
@@ -316,10 +320,9 @@ void Executive::run()
 
 				
 			}
-			sweep.Marking(row,col,2);	//call flagging method after good input is enforced
+			sweep.Marking(row,col);	//call flagging method after good input is enforced
 		}
 		
 		
 	}
-
 }
