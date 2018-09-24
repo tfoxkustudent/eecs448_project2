@@ -10,6 +10,8 @@
 #include "Minesweeper.h"
 #include <string>
 #include <exception>
+#include <cstdlib>
+#include <sstream>
 using namespace std;
 
 
@@ -295,7 +297,9 @@ void Minesweeper::RecCheck(int Row, int Col)
     }
     else
     {
-      Uboard[Row][Col]=to_string(Check(Row,Col));//set the spot to the number of the mines those are adjacent to it.
+	  stringstream strm;
+	  strm << Check(Row,Col);
+      Uboard[Row][Col]=strm.str();//set the spot to the number of the mines those are adjacent to it.
     }
   }
 }
