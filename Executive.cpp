@@ -160,11 +160,11 @@ void Executive::run()
 				if(sweep.Revealing(row,col)==false)  //after forcing good input, calls Revealing and if it returns false, the user has selected a mine. The game ends
                 {
 					sweep.print(2);
-					std::cout<<"Sorry.You lose!\n Do you want to play again? \n Type 'y' for 'yes' and 'n' for 'no'";
+					std::cout<<"Sorry.You lose!\n";
 					char playChoice='\0';
-					std::cin>>playChoice;
-					playChoice=std::tolower(playChoice);
-					std::cout<<"Congratulations!You win the game!\n";
+					// std::cin>>playChoice;
+					// playChoice=std::tolower(playChoice);
+					// std::cout<<"Congratulations!You win the game!\n";
 					std::cout<<"Do you want to play again?(Yes(Y/y) or No(N/n)):";
 					while(true)//loop to get the write answer.
 					{
@@ -175,7 +175,7 @@ void Executive::run()
 						}
 						else
 						{
-				    		std::cout<<"Please enter right choice(Only Y/y or N/n).\n";
+				    		std::cout<<"Please enter right choice(Only Y/y or N/n):";
 						}
 					}
 					if(playChoice=='Y' || playChoice=='y')
