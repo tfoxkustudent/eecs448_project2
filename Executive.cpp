@@ -54,7 +54,7 @@ void Executive::run()
 		{
 			std::cin.clear();
 			std::cin.ignore();
-			std::cout<<"Please provide a valid entry!\n"<<"Please make your selection:\n1)R(Reveal)\n2)F(Flag)\n3)U(Unflag)\n4)E(Exit)\n";
+			std::cout<<"Please provide a valid entry!\n"<<"Please make your selection:\n1)R(Reveal)\n2)F(Flag)\n3)U(Unflag)\n4)C(Cheat)\n5)E(Exit)\n";
 			std::cin>>choice;
 			std::cout<<endl;
 		}
