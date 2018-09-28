@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 		
 		while(row<2|| row>40)   //checks to see if row is in bounds
 		{
-			std::cout<<"The number of rows you provided is out of bounds. The lower bound is 2 and the upper bound is 4.\n Enter # of rows: ";
+			std::cout<<"The number of rows you provided is out of bounds. The lower bound is 2 and the upper bound is 40.\n Enter # of rows: ";
 			std::cin>>row;
 
 
@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
 		
 		while(col<2|| col>40)   //checks to see if row is in bounds
 		{
-			std::cout<<"The number of columns you provided is out of bounds. The lower bound is 2 and the upper bound is 4.\n Enter # of columns: ";
+			std::cout<<"The number of columns you provided is out of bounds. The lower bound is 2 and the upper bound is 40.\n Enter # of columns: ";
 			std::cin>>col;
 
 
