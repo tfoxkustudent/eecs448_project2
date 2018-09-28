@@ -99,7 +99,7 @@ void Executive::run()
 
 
 		
-			while(row>m_row || row<0)   //checks to see if row is in bounds
+			while(row>=m_row || row<0)   //checks to see if row is in bounds
 			{
 				std::cout<<"The row you provided is out of bounds. The max row you can select is "<< m_row-1<<"\n Row:";
 				std::cin>>row;
