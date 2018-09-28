@@ -346,7 +346,7 @@ void Minesweeper::print(int option)
     		}
 		for(int j=0; j<m_col; j++)
 		{
-      			if(option==2&&Bboard[i][j]=="M")//Print mines when user lose the game.
+      			if(option==2&&Bboard[i][j]=="M")//Print mines when user lose the game or enters cheat mode.
 			{
         			cout<<"M"<<"   ";
       			}

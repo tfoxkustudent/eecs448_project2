@@ -46,7 +46,7 @@ void Executive::run()
 		
 		sweep.print(1);
 	
-		std::cout<<"Please make your selection:\n1)R(Reveal)\n2)F(Flag)\n3)U(Unflag)\n4)E(Exit)\n";
+		std::cout<<"Please make your selection:\n1)R(Reveal)\n2)F(Flag)\n3)U(Unflag)\n4)C(Cheat)\n5)E(Exit)\n";
 		std::cout<<"You have "<<(m_mines-m_flag)<<" flag(s) can be used.\n";
 		std::cin>>choice;
 
@@ -59,7 +59,7 @@ void Executive::run()
 			std::cout<<endl;
 		}
 		
-		while(choice!="r" && choice != "R" && choice != "f" && choice!= "F" && choice != "e" && choice != "E" && choice != "u" && choice != "U")
+		while(choice!="r" && choice != "R" && choice != "f" && choice!= "F" && choice != "e" && choice != "E" && choice != "u" && choice != "U" && choice != "c" && choice != "C")
 		{
 			std::cout<<"Provide a valid move: ";
 			std::cin>>choice;
@@ -342,6 +342,9 @@ void Executive::run()
 			}
 		}
 		
+		else if (choice == "C") {
+			sweep.print(2);
+		}		
 		
 	}
 }
