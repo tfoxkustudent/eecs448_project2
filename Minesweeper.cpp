@@ -170,61 +170,19 @@ int Minesweeper::Check(int Row, int Col)
 {
 
   int count=0;
-      if(Row<m_row && Col+1 < m_col && Row>=0 && Col+1>=0)
+  //case i = 0 and j = 0 will never add to count as hitting mine will end game before check() is called
+  for(int i = -1; i <= 1; i++)//i for rows
+  {
+    for(int i = -1; i <= 1; i++)// j for cols
+    {
+      if(Row+i<m_row && Col+j < m_col && Row+i>=0 && Col+j>=0)
       {
-        if(Bboard[Row][Col+1]=="M")
+        if(Bboard[Row+i][Col+j]=="M")
         {
           count++;
         }
       }
-     if(Row<m_row && Col-1 < m_col && Row>=0 && Col-1>=0)
-     {
-      if(Bboard[Row][Col-1]=="M")
-      {
-        count++;
-      }
-     }
-     if(Row+1<m_row && Col< m_col && Row+1>=0 && Col>=0)
-     {
-      if(Bboard[Row+1][Col]=="M")
-      {
-        count++;
-      }
-     }
-     if(Row-1<m_row && Col<m_col && Row-1>=0 && Col>=0)
-     {
-      if(Bboard[Row-1][Col]=="M")
-      {
-        count++;
-      }
-     }
-     if(Row+1<m_row && Col+1 < m_col && Row+1>=0 && Col+1>=0)
-     {
-        if(Bboard[Row+1][Col+1]=="M")
-      {
-        count++;
-      }
-     }
-     if(Row+1<m_row && Col-1 < m_col && Row+1>=0 && Col-1>=0)
-     {
-        if(Bboard[Row+1][Col-1]=="M")
-      {
-        count++;
-      }
-     }
-     if(Row-1<m_row && Col+1 < m_col&& Row-1>=0 && Col+1>=0)
-     {
-      if(Bboard[Row-1][Col+1]=="M")
-      {
-        count++;
-      }
-     }
-     if(Row-1<m_row && Col-1 <m_col&& Row-1>=0 && Col-1>=0)
-     {
-      if(Bboard[Row-1][Col-1]=="M")
-      {
-        count++;
-      }
+    }
   }
   return(count);
 }
@@ -240,45 +198,16 @@ void Minesweeper::RecCheck(int Row, int Col)
     if(Check(Row,Col)==0 && Uboard[Row][Col]=="■")//Condition 1: There are no mines adjacent to the input position and this spot is in defalt status.
     {
       Uboard[Row][Col]="□";
-      if(Row-1<m_row && Col-1 < m_col && Row-1>=0 && Col-1>=0)//Begin to check the 8 directions of the input position
+      // case i = 0 and j = 0 will go down to check if it is next to mine and will not cuase infinite recurive loop
+      for (int i = -1; i <= 1; i++)//i is for rows
       {
-        RecCheck(Row-1,Col-1);
-        
-      }
-      if(Row+1<m_row && Col+1 < m_col && Row+1>=0 && Col+1>=0)
-      {
-        RecCheck(Row+1,Col+1);
-        
-      }
-      if(Row+1<m_row && Col-1 < m_col&& Row+1>=0 && Col-1>=0)
-      {
-        RecCheck(Row+1,Col-1);
-        
-      }
-      if(Row-1<m_row && Col+1 < m_col&& Row-1>=0 && Col+1>=0)
-      {
-        RecCheck(Row-1,Col+1);
-        
-      }
-      if(Row<m_row && Col+1 < m_col&& Row>=0 && Col+1>=0)
-      {
-        RecCheck(Row,Col+1);
-        
-      }
-      if(Row+1<m_row && Col < m_col && Row+1>=0 && Col>=0)
-      {
-        RecCheck(Row+1,Col);
-        
-      }
-      if(Row<m_row && Col-1 < m_col&& Row>=0 && Col-1>=0)
-      {
-        RecCheck(Row,Col-1);
-        
-      }
-      if(Row-1<m_row && Col <m_col&& Row-1>=0 && Col>=0)
-      {
-        RecCheck(Row-1,Col);
-       
+        for(int j = -1; j <= 1; j++)//j is for cols
+        {
+          if(Row+i<m_row && Col+j< m_col && Row+i>=0 && Col+j>=0)//Begin to check the 8 directions of the input position
+          {
+            RecCheck(Row+i,Col+j);
+          }
+        }
       }
     }
     else//Condition 2: There are mines adjacent to the input position.
