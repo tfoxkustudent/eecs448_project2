@@ -21,7 +21,7 @@ Minesweeper:: Minesweeper(int Row, int Col, int NumOfMines)
   m_row = Row;
   m_col = Col;
   m_mines = NumOfMines;
-  NumOfFlag=0;
+  NumOfFlag=0;//
   //cout<<m_mines<<"M\n";
   //remaining = num;
 
@@ -124,7 +124,7 @@ bool Minesweeper::Marking(int Row, int Col) throw (runtime_error)
 /*-------------------------------------------------------------------------------------------------unMarking-----------------------------------------------------------------------------------*/
 void Minesweeper::unMarking(int Row,int Col) throw(runtime_error)
 {
-  if((Uboard[Row][Col]!="F"))
+  if(Uboard[Row][Col]!="F")
   {
     throw(runtime_error("\n-----Cannot unflag the spot without flag.-----\n"));
   }
@@ -235,67 +235,62 @@ int Minesweeper::Check(int Row, int Col)
 /*-------------------------------------------------------------------------------------------------RecCheck-----------------------------------------------------------------------------------*/
 void Minesweeper::RecCheck(int Row, int Col)
 {
-  if(Check(Row,Col)==0 && Uboard[Row][Col]=="■")//Condition 1: There are no mines adjacent to the input position and this spot is in defalt status.
+  if(Uboard[Row][Col]!="F")//makes sure flagged spots arn't revealed when being revealed from RecCheck. redundant check first time when being called from revealing()
   {
-    Uboard[Row][Col]="□";
-    if(Row-1<m_row && Col-1 < m_col && Row-1>=0 && Col-1>=0)//Begin to check the 8 directions of the input position
+    if(Check(Row,Col)==0 && Uboard[Row][Col]=="■")//Condition 1: There are no mines adjacent to the input position and this spot is in defalt status.
     {
       Uboard[Row][Col]="□";
-      RecCheck(Row-1,Col-1);
-      
+      if(Row-1<m_row && Col-1 < m_col && Row-1>=0 && Col-1>=0)//Begin to check the 8 directions of the input position
+      {
+        RecCheck(Row-1,Col-1);
+        
+      }
+      if(Row+1<m_row && Col+1 < m_col && Row+1>=0 && Col+1>=0)
+      {
+        RecCheck(Row+1,Col+1);
+        
+      }
+      if(Row+1<m_row && Col-1 < m_col&& Row+1>=0 && Col-1>=0)
+      {
+        RecCheck(Row+1,Col-1);
+        
+      }
+      if(Row-1<m_row && Col+1 < m_col&& Row-1>=0 && Col+1>=0)
+      {
+        RecCheck(Row-1,Col+1);
+        
+      }
+      if(Row<m_row && Col+1 < m_col&& Row>=0 && Col+1>=0)
+      {
+        RecCheck(Row,Col+1);
+        
+      }
+      if(Row+1<m_row && Col < m_col && Row+1>=0 && Col>=0)
+      {
+        RecCheck(Row+1,Col);
+        
+      }
+      if(Row<m_row && Col-1 < m_col&& Row>=0 && Col-1>=0)
+      {
+        RecCheck(Row,Col-1);
+        
+      }
+      if(Row-1<m_row && Col <m_col&& Row-1>=0 && Col>=0)
+      {
+        RecCheck(Row-1,Col);
+       
+      }
     }
-    if(Row+1<m_row && Col+1 < m_col && Row+1>=0 && Col+1>=0)
+    else//Condition 2: There are mines adjacent to the input position.
     {
-      Uboard[Row][Col]="□";
-      RecCheck(Row+1,Col+1);
-      
-    }
-    if(Row+1<m_row && Col-1 < m_col&& Row+1>=0 && Col-1>=0)
-    {
-      Uboard[Row][Col]="□";
-      RecCheck(Row+1,Col-1);
-      
-    }
-    if(Row-1<m_row && Col+1 < m_col&& Row-1>=0 && Col+1>=0)
-    {
-      Uboard[Row][Col]="□";
-      RecCheck(Row-1,Col+1);
-      
-    }
-    if(Row<m_row && Col+1 < m_col&& Row>=0 && Col+1>=0)
-    {
-      Uboard[Row][Col]="□";
-      RecCheck(Row,Col+1);
-      
-    }
-    if(Row+1<m_row && Col < m_col && Row+1>=0 && Col>=0)
-    {
-      Uboard[Row][Col]="□";
-      RecCheck(Row+1,Col);
-      
-    }
-    if(Row<m_row && Col-1 < m_col&& Row>=0 && Col-1>=0)
-    {
-      Uboard[Row][Col]="□";
-      RecCheck(Row,Col-1);
-      
-    }
-    if(Row-1<m_row && Col <m_col&& Row-1>=0 && Col>=0)
-    {
-      Uboard[Row][Col]="□";
-      RecCheck(Row-1,Col);
-     
-    }
-  }
-  else//Condition 2: There are mines adjacent to the input position.
-  {
-    if(Check(Row,Col)==0)//This was set to prevent the situation the 0 will show on the board.
-    {
-      Uboard[Row][Col]="□";
-    }
-    else
-    {
-      Uboard[Row][Col]=to_string(Check(Row,Col));//set the spot to the number of the mines those are adjacent to it.
+      if(Check(Row,Col)==0)//This was set to prevent the situation the 0 will show on the board.
+      {
+        Uboard[Row][Col]="□";
+      }
+      else
+      {
+        Uboard[Row][Col]=to_string(Check(Row,Col));//set the spot to the number of the mines those are adjacent to it.
+      }
     }
   }
 }
