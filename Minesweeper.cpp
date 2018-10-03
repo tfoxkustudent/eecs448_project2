@@ -10,8 +10,6 @@
 #include "Minesweeper.h"
 #include <string>
 #include <exception>
-#include <cstdlib>
-#include <sstream>
 using namespace std;
 
 
@@ -23,7 +21,7 @@ Minesweeper:: Minesweeper(int Row, int Col, int NumOfMines)
   m_row = Row;
   m_col = Col;
   m_mines = NumOfMines;
-  NumOfFlag=0;
+  NumOfFlag=0;//
   //cout<<m_mines<<"M\n";
   //remaining = num;
 
@@ -126,7 +124,7 @@ bool Minesweeper::Marking(int Row, int Col) throw (runtime_error)
 /*-------------------------------------------------------------------------------------------------unMarking-----------------------------------------------------------------------------------*/
 void Minesweeper::unMarking(int Row,int Col) throw(runtime_error)
 {
-  if((Uboard[Row][Col]!="F"))
+  if(Uboard[Row][Col]!="F")
   {
     throw(runtime_error("\n-----Cannot unflag the spot without flag.-----\n"));
   }
@@ -172,61 +170,19 @@ int Minesweeper::Check(int Row, int Col)
 {
 
   int count=0;
-      if(Row<m_row && Col+1 < m_col && Row>=0 && Col+1>=0)
+  //case i = 0 and j = 0 will never add to count as hitting mine will end game before check() is called
+  for(int i = -1; i <= 1; i++)//i for rows
+  {
+    for(int i = -1; i <= 1; i++)// j for cols
+    {
+      if(Row+i<m_row && Col+j < m_col && Row+i>=0 && Col+j>=0)
       {
-        if(Bboard[Row][Col+1]=="M")
+        if(Bboard[Row+i][Col+j]=="M")
         {
           count++;
         }
       }
-     if(Row<m_row && Col-1 < m_col && Row>=0 && Col-1>=0)
-     {
-      if(Bboard[Row][Col-1]=="M")
-      {
-        count++;
-      }
-     }
-     if(Row+1<m_row && Col< m_col && Row+1>=0 && Col>=0)
-     {
-      if(Bboard[Row+1][Col]=="M")
-      {
-        count++;
-      }
-     }
-     if(Row-1<m_row && Col<m_col && Row-1>=0 && Col>=0)
-     {
-      if(Bboard[Row-1][Col]=="M")
-      {
-        count++;
-      }
-     }
-     if(Row+1<m_row && Col+1 < m_col && Row+1>=0 && Col+1>=0)
-     {
-        if(Bboard[Row+1][Col+1]=="M")
-      {
-        count++;
-      }
-     }
-     if(Row+1<m_row && Col-1 < m_col && Row+1>=0 && Col-1>=0)
-     {
-        if(Bboard[Row+1][Col-1]=="M")
-      {
-        count++;
-      }
-     }
-     if(Row-1<m_row && Col+1 < m_col&& Row-1>=0 && Col+1>=0)
-     {
-      if(Bboard[Row-1][Col+1]=="M")
-      {
-        count++;
-      }
-     }
-     if(Row-1<m_row && Col-1 <m_col&& Row-1>=0 && Col-1>=0)
-     {
-      if(Bboard[Row-1][Col-1]=="M")
-      {
-        count++;
-      }
+    }
   }
   return(count);
 }
@@ -237,69 +193,33 @@ int Minesweeper::Check(int Row, int Col)
 /*-------------------------------------------------------------------------------------------------RecCheck-----------------------------------------------------------------------------------*/
 void Minesweeper::RecCheck(int Row, int Col)
 {
-  if(Check(Row,Col)==0 && Uboard[Row][Col]=="■")//Condition 1: There are no mines adjacent to the input position and this spot is in defalt status.
+  if(Uboard[Row][Col]!="F")//makes sure flagged spots arn't revealed when being revealed from RecCheck. redundant check first time when being called from revealing()
   {
-    Uboard[Row][Col]="□";
-    if(Row-1<m_row && Col-1 < m_col && Row-1>=0 && Col-1>=0)//Begin to check the 8 directions of the input position
+    if(Check(Row,Col)==0 && Uboard[Row][Col]=="■")//Condition 1: There are no mines adjacent to the input position and this spot is in defalt status.
     {
       Uboard[Row][Col]="□";
-      RecCheck(Row-1,Col-1);
-      
+      // case i = 0 and j = 0 will go down to check if it is next to mine and will not cuase infinite recurive loop
+      for (int i = -1; i <= 1; i++)//i is for rows
+      {
+        for(int j = -1; j <= 1; j++)//j is for cols
+        {
+          if(Row+i<m_row && Col+j< m_col && Row+i>=0 && Col+j>=0)//Begin to check the 8 directions of the input position
+          {
+            RecCheck(Row+i,Col+j);
+          }
+        }
+      }
     }
-    if(Row+1<m_row && Col+1 < m_col && Row+1>=0 && Col+1>=0)
+    else//Condition 2: There are mines adjacent to the input position.
     {
-      Uboard[Row][Col]="□";
-      RecCheck(Row+1,Col+1);
-      
-    }
-    if(Row+1<m_row && Col-1 < m_col&& Row+1>=0 && Col-1>=0)
-    {
-      Uboard[Row][Col]="□";
-      RecCheck(Row+1,Col-1);
-      
-    }
-    if(Row-1<m_row && Col+1 < m_col&& Row-1>=0 && Col+1>=0)
-    {
-      Uboard[Row][Col]="□";
-      RecCheck(Row-1,Col+1);
-      
-    }
-    if(Row<m_row && Col+1 < m_col&& Row>=0 && Col+1>=0)
-    {
-      Uboard[Row][Col]="□";
-      RecCheck(Row,Col+1);
-      
-    }
-    if(Row+1<m_row && Col < m_col && Row+1>=0 && Col>=0)
-    {
-      Uboard[Row][Col]="□";
-      RecCheck(Row+1,Col);
-      
-    }
-    if(Row<m_row && Col-1 < m_col&& Row>=0 && Col-1>=0)
-    {
-      Uboard[Row][Col]="□";
-      RecCheck(Row,Col-1);
-      
-    }
-    if(Row-1<m_row && Col <m_col&& Row-1>=0 && Col>=0)
-    {
-      Uboard[Row][Col]="□";
-      RecCheck(Row-1,Col);
-     
-    }
-  }
-  else//Condition 2: There are mines adjacent to the input position.
-  {
-    if(Check(Row,Col)==0)//This was set to prevent the situation the 0 will show on the board.
-    {
-      Uboard[Row][Col]="□";
-    }
-    else
-    {
-	  stringstream strm;
-	  strm << Check(Row,Col);
-      Uboard[Row][Col]=strm.str();//set the spot to the number of the mines those are adjacent to it.
+      if(Check(Row,Col)==0)//This was set to prevent the situation the 0 will show on the board.
+      {
+        Uboard[Row][Col]="□";
+      }
+      else
+      {
+        Uboard[Row][Col]=to_string(Check(Row,Col));//set the spot to the number of the mines those are adjacent to it.
+      }
     }
   }
 }
