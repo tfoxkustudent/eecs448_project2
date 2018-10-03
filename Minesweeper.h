@@ -137,7 +137,7 @@ public:
    * @param row the target position's Row (int)
    * @param col the target position's column (int)
    **/
-  bool Revealing(int Row, int Col) throw(runtime_error);
+  bool Revealing(int Row, int Col);
 
     /**
    * @brief Marking is the function that deals with flagging
@@ -146,7 +146,7 @@ public:
    * @param row the target position's Row (int)
    * @param col the target position's column (int)
    **/
-  bool Marking(int Row, int Col) throw(runtime_error);
+  bool Marking(int Row, int Col);
   
   /**
    * @brief unMarking is the function that deals with unflagging
@@ -155,15 +155,37 @@ public:
    * @param row the target position's Row (int)
    * @param col the target position's column (int)
    **/
-  void unMarking(int Row, int Col) throw(runtime_error);
+  void unMarking(int Row, int Col);
 /** 
  * @brief Reset creates a new board with the same dimensions but randomizes the placement of the mines.
  * @pre  Null.
  * @post Reset the Uboard and Bboard and the game start over.
  * @param Null.
 **/
-
   void Reset();
+
+
+  /**
+   * @brief Returns max number of rows in board
+   * @pre NONE
+   * @return number of rows in board
+   **/
+  int getRowMax();
+
+  /**
+   * @brief Returns max number of columns in board
+   * @pre NONE
+   * @return number of columns in board
+   **/
+  int getColMax(); 
   
+
+    /**
+   * @brief Returns number of mines
+   * @pre NONE
+   * @return number of rnumber of mines
+   **/
+  int getMines();
+
 };
 #endif
