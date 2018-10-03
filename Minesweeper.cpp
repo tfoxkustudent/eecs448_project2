@@ -173,7 +173,7 @@ int Minesweeper::Check(int Row, int Col)
   //case i = 0 and j = 0 will never add to count as hitting mine will end game before check() is called
   for(int i = -1; i <= 1; i++)//i for rows
   {
-    for(int i = -1; i <= 1; i++)// j for cols
+    for(int j = -1; j <= 1; j++)// j for cols
     {
       if(Row+i<m_row && Col+j < m_col && Row+i>=0 && Col+j>=0)
       {

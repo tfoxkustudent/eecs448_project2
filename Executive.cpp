@@ -317,9 +317,9 @@ void Executive::run()
 				{
 					std::cout<<"Please enter your row:";
 					std::cin>>row;
-                    while(row>=m_row || row<0)   //checks to see if row is in bounds
+                    while(row>=sweep->getRowMax() || row<0)   //checks to see if row is in bounds
                     {
-                        std::cout<<"The row you provided is out of bounds. The max row you can select is "<< m_row-1<<"\n Row:";
+                        std::cout<<"The row you provided is out of bounds. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
                         std::cin>>row;
                         
                         
@@ -335,9 +335,9 @@ void Executive::run()
                     }//end failbit
 					std::cout<<"Please enter your column:";
 					std::cin>>col;
-                    while(col>=m_col || col<0)  //checks to see if col is in bounds
+                    while(col>=sweep->getColMax() || col<0)  //checks to see if col is in bounds
                     {
-                        std::cout<<"The column you provided is out of bounds. The max column you can select is "<< m_col-1<<"\nCol:";
+                        std::cout<<"The column you provided is out of bounds. The max column you can select is "<< sweep->getColMax()-1<<"\nCol:";
                         std::cin>>col;
                         
                         
