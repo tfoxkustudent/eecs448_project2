@@ -343,7 +343,7 @@ void Executive::run()
 		}
 		
 		else if (choice == "C") {
-			sweep.print(2);
+			sweep.print(3);
 		}		
 		
 	}

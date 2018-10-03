@@ -83,10 +83,29 @@ void Minesweeper::setMines()
     int tempCol = rand() % (m_col);
     //cout<<tempRow<<tempCol<<"\n";
     //set the mine is the block is blank, otherwise keep looping
-    if(Bboard[tempRow][tempCol] == "■")
+    if(Bboard[tempRow][tempCol] != "M")
     {
       Bboard[tempRow][tempCol] = "M";
       count++;
+	  for (int i = -1; i <= 1; i++) {
+		  for (int j = -1; j <= 1; j++) {
+			  if (tempRow+i >= 0 && tempRow+i < m_row && tempCol+j >= 0 && tempCol+j < m_col && Bboard[tempRow+i][tempCol+j] != "M") {
+				  if (Bboard[tempRow+i][tempCol+j] == "■") {
+					  Bboard[tempRow+i][tempCol+j] = "1";
+				  }
+				  else {
+					  stringstream strmIN(Bboard[tempRow+i][tempCol+j]);
+					  stringstream strmOUT;
+					  int bombCnt;
+					  strmIN >> bombCnt;
+					  bombCnt++;
+					  strmOUT << bombCnt;
+					  cout << tempRow+i << ", " << tempCol+j << ": " << strmOUT.str() << " ";
+					  Bboard[tempRow+i][tempCol+j] = strmOUT.str();
+				  }
+			  }
+		  }
+	  }
     }
   }
 }
@@ -315,17 +334,17 @@ void Minesweeper::print(int option)
 	for(int k=0;k<m_col; k++)
 	{
 		if(k<9)
-    		{
-      			cout<<k<<"   ";
-    		}
-    		else if(k==9) 
-    		{
-     			cout<<k<<"   ";
-    		}
-    		else
-    		{
-      			cout<<k<<"  ";
-    		}
+		{
+			cout<<k<<"   ";
+		}
+		else if(k==9) 
+		{
+			cout<<k<<"   ";
+		}
+		else
+		{
+			cout<<k<<"  ";
+		}
 
 	}
 	
@@ -346,11 +365,14 @@ void Minesweeper::print(int option)
     		}
 		for(int j=0; j<m_col; j++)
 		{
-      			if(option==2&&Bboard[i][j]=="M")//Print mines when user lose the game or enters cheat mode.
+      		if(option==2&&Bboard[i][j]=="M")//Print mines when user lose the game.
 			{
-        			cout<<"M"<<"   ";
-      			}
-     			else
+        		cout<<"M"<<"   ";
+      		}
+			else if (option == 3) {
+				cout << Bboard[i][j] << "   ";
+			}
+     		else
 			{
 				cout<<Uboard[i][j]<<"   ";
 			}   
