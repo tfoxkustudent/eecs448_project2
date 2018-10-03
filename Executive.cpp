@@ -351,7 +351,7 @@ void Executive::run()
                             std::cout<<endl;
                         }            //end failbit
                     }
-					m_flag++;
+					
 					if(sweep->Marking(row,col))//Condition1: user win.
 					{
 						std::cout<<"Congratulations!You win the game!\n";
@@ -378,6 +378,7 @@ void Executive::run()
 							break;
 						}
 				    }
+			m_flag++;
 				}
 				catch(std::runtime_error &e)
 				{
