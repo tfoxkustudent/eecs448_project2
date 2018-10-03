@@ -5,32 +5,13 @@
  * @brief Executive implementation file 
 **/
 
-
-
-
 #include "Executive.h"
-
 
 Executive::Executive()
 {
-	m_row=0;
-	m_col=0;
-	m_mines=0;
-}
-
-
-
-
-Executive::Executive(int row, int col, int mines)
-{
-
-
-	m_row=row;
-	m_col=col;
-	m_mines=mines;
 	m_flag=0;
-
 }
+
 
 std::shared_ptr<Minesweeper> Executive::create()
 {
@@ -155,7 +136,7 @@ void Executive::run()
 	
 
 		std::cout<<"Please make your selection:\n1)R(Reveal)\n2)F(Flag)\n3)U(Unflag)\n4)C(Cheat)\n5)E(Exit)\n";
-		std::cout<<"You have "<<(m_mines-m_flag)<<" flag(s) can be used.\n";
+		std::cout<<"You have "<<(sweep->getMines()-m_flag)<<" flag(s) can be used.\n";
 
 
 		std::cin>>choice;
