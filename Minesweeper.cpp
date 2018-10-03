@@ -10,6 +10,7 @@
 #include "Minesweeper.h"
 #include <string>
 #include <exception>
+#include <sstream>
 using namespace std;
 
 
