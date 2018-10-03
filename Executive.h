@@ -11,6 +11,7 @@
 #include <limits>
 #include <cstdlib>
 #include <stdlib.h>
+#include <memory>
 
 
 class Executive
@@ -74,5 +75,8 @@ int m_mines;
 **/
 int m_flag;
 
+std::shared_ptr<Minesweeper> sweep;
+
+std::shared_ptr<Minesweeper> create();
 };
 #endif

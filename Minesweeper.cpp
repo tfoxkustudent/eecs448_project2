@@ -92,7 +92,7 @@ void Minesweeper::setMines()
 }
 //end set
 /*-------------------------------------------------------------------------------------------------Marking-----------------------------------------------------------------------------------*/
-bool Minesweeper::Marking(int Row, int Col) throw (runtime_error)
+bool Minesweeper::Marking(int Row, int Col)
 {
     if(Uboard[Row][Col]!="■")
     {
@@ -124,7 +124,7 @@ bool Minesweeper::Marking(int Row, int Col) throw (runtime_error)
 
 
 /*-------------------------------------------------------------------------------------------------unMarking-----------------------------------------------------------------------------------*/
-void Minesweeper::unMarking(int Row,int Col) throw(runtime_error)
+void Minesweeper::unMarking(int Row,int Col)
 {
   if((Uboard[Row][Col]!="F"))
   {
@@ -144,7 +144,7 @@ void Minesweeper::unMarking(int Row,int Col) throw(runtime_error)
 
 
 /*-------------------------------------------------------------------------------------------------Revealing-----------------------------------------------------------------------------------*/
-bool Minesweeper::Revealing(int Row, int Col) throw(runtime_error)
+bool Minesweeper::Revealing(int Row, int Col)
 {
   if(Uboard[Row][Col]!="■")
   {
@@ -377,3 +377,19 @@ void Minesweeper::Reset()
   setMines();
 }
 //end Reset
+
+
+ int Minesweeper::getRowMax()
+ {
+   return m_row;
+ }
+
+int Minesweeper::getColMax()
+ {
+   return m_col;
+ }
+
+ int Minesweeper::getMines()
+ {
+   return m_mines;
+ }
