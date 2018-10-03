@@ -132,8 +132,13 @@ void Executive::run()
 	
 	while(true)
 	{
-		sweep->print(1);
-	
+		
+		if (choice == "C") {
+			sweep->print(3);
+		}
+		else {
+			sweep->print(1);
+		}
 
 		std::cout<<"Please make your selection:\n1)R(Reveal)\n2)F(Flag)\n3)U(Unflag)\n4)C(Cheat)\n5)E(Exit)\n";
 		std::cout<<"You have "<<(sweep->getMines()-m_flag)<<" flag(s) can be used.\n";
@@ -461,10 +466,6 @@ void Executive::run()
 			{
 				std::cout<<e.what();
 			}
-		}
-		
-		else if (choice == "C") {
-			sweep->print(3);
 		}		
 		
 	}
