@@ -100,7 +100,6 @@ void Minesweeper::setMines()
 					  strmIN >> bombCnt;
 					  bombCnt++;
 					  strmOUT << bombCnt;
-					  cout << tempRow+i << ", " << tempCol+j << ": " << strmOUT.str() << " ";
 					  Bboard[tempRow+i][tempCol+j] = strmOUT.str();
 				  }
 			  }
