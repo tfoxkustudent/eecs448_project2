@@ -1,4 +1,4 @@
-/** 
+/**
  * @author Team FourFour8
  * @file Minesweeper.cpp
  * @date September 2018
@@ -116,14 +116,14 @@ bool Minesweeper::Marking(int Row, int Col)
       throw(runtime_error("\n-----Cannot flag on non-blank block.-----\n"));
     }
     else
-    {  
+    {
       Uboard[Row][Col] = "F";
       if(Bboard[Row][Col]=="M")
       {
         NumOfFlag++;
         if(NumOfFlag==m_mines)
         {
-          return(true);//Condition1:set all the flags on the correct mines. 
+          return(true);//Condition1:set all the flags on the correct mines.
         }
         else
         {
@@ -135,8 +135,8 @@ bool Minesweeper::Marking(int Row, int Col)
         return(false);//Condition3:set one flag on the wrong position.
       }
     }
-} 
-//end Marking 
+}
+//end Marking
 
 
 
@@ -177,7 +177,7 @@ bool Minesweeper::Revealing(int Row, int Col)
     {
       RecCheck(Row, Col);
       return(true);
-    }  
+    }
   }
 }
 //end Revealing
@@ -257,7 +257,7 @@ void Minesweeper::print(int option)
 		{
 			cout<<k<<"   ";
 		}
-		else if(k==9) 
+		else if(k==9)
 		{
 			cout<<k<<"   ";
 		}
@@ -267,10 +267,10 @@ void Minesweeper::print(int option)
 		}
 
 	}
-	
+
 
 	cout<<endl;
-	
+
 
 	for(int i=0; i<m_row; i++)
 	{
@@ -279,7 +279,7 @@ void Minesweeper::print(int option)
     		{
      			 cout<<i<<"   ";
     		}
-    		else 
+    		else
     		{
       			cout<<i<<"  ";
     		}
@@ -295,7 +295,7 @@ void Minesweeper::print(int option)
      		else
 			{
 				cout<<Uboard[i][j]<<"   ";
-			}   
+			}
 		}
 		cout<<"\n";
 	}
@@ -335,3 +335,23 @@ int Minesweeper::getColMax()
  {
    return m_mines;
  }
+
+ /*---------------------------------------------------------------LittleHelperFunction----------------------------*/
+
+ void Minesweeper::Helping(int Row, int Col)  //little helper function
+ {
+
+       Uboard[Row][Col] = "$";
+       Uboard[Row-1][Col-1]= Bboard[Row-1][Col-1];
+       Uboard[Row-1][Col]= Bboard[Row-1][Col];
+       Uboard[Row-1][Col+1]= Bboard[Row-1][Col+1];
+       Uboard[Row][Col-1]= Bboard[Row][Col-1];
+       Uboard[Row][Col+1]= Bboard[Row][Col+1];
+       Uboard[Row+1][Col-1]= Bboard[Row+1][Col-1];
+       Uboard[Row+1][Col]= Bboard[Row+1][Col];
+       Uboard[Row+1][Col+1]= Bboard[Row+1][Col+1];
+
+
+
+ }
+ //end little helper function

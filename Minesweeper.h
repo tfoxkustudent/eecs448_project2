@@ -1,4 +1,4 @@
-/** 
+/**
  * @author Team FourFour8
  * @file Minesweeper.h
  * @date September 2018
@@ -31,7 +31,7 @@ private:
 /**
  * an integer
  * privately stores the number of columns
-**/  
+**/
   int m_col;
 
 /**
@@ -39,21 +39,21 @@ private:
  * privately stores the number of mines
 **/
   int m_mines;
-  
+
 
 
 /**
- * a 2D array of strings 
+ * a 2D array of strings
  * privately stores the representation of the user facing board
 **/
   string** Uboard;// The board for user which will display everytime after user make moves.
-  
+
 /**
- * a 2D array of strings 
+ * a 2D array of strings
  * privately stores the representation of the back-facing board
 **/
   string** Bboard;// The board to store the position of mines.
-  
+
 /**
  * an integer
  * privately stores the number of flags
@@ -70,7 +70,7 @@ private:
 
 
 
-  
+
 /**
  * @brief RecCheck is A function that recursively checks the spots around it. RecCheck checks each of the eight possible paths and recursively tries each one until it reaches a spot adjacent to a mine or an edge.
  * @return void
@@ -95,19 +95,19 @@ private:
  * @post If there are mines adjacent to the target position, sets the position to the number of adjacent mines.
 **/
 	int Check(int Row, int Col);
- 
-  
 
-  
+
+
+
 
 public:
 /**
  * @pre  Null.
  * @post Create two boards with the input rows and colns and sets the mines on Bboard.
- * @param row the target position's row (int)  
+ * @param row the target position's row (int)
  * @param the target position's column (int)
  * @param NumofMines Number of mines the user wants (int). Exclusively between 1 and row*col - 1
-  
+
 **/
   Minesweeper(int Row, int Col, int NumOfMines);
 
@@ -121,7 +121,7 @@ public:
   ~Minesweeper();
 
 /**
- * @brief 
+ * @brief
  * @pre  Null.
  * @post Print the Uboard
  * @param Null.
@@ -147,7 +147,7 @@ public:
    * @param col the target position's column (int)
    **/
   bool Marking(int Row, int Col);
-  
+
   /**
    * @brief unMarking is the function that deals with unflagging
    * @pre  A valid input position.
@@ -156,7 +156,7 @@ public:
    * @param col the target position's column (int)
    **/
   void unMarking(int Row, int Col);
-/** 
+/**
  * @brief Reset creates a new board with the same dimensions but randomizes the placement of the mines.
  * @pre  Null.
  * @post Reset the Uboard and Bboard and the game start over.
@@ -177,8 +177,8 @@ public:
    * @pre NONE
    * @return number of columns in board
    **/
-  int getColMax(); 
-  
+  int getColMax();
+
 
     /**
    * @brief Returns number of mines
@@ -186,6 +186,13 @@ public:
    * @return number of rnumber of mines
    **/
   int getMines();
+
+  /**
+  * @brief Returns Character and surround spaces
+  * @pre A valid Input location
+  * @return character and surrounding spaces
+  **/
+  void Helping(int Row, int Col);
 
 };
 #endif
