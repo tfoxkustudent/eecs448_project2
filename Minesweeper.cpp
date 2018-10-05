@@ -81,48 +81,27 @@ void Minesweeper::setMines()
     //set the mine is the block is blank, otherwise keep looping
     if(Bboard[tempRow][tempCol] != "M")
     {
-      Bboard[tempRow][tempCol] = "M";
-      count++;
-<<<<<<< HEAD
-	  for (int i = -1; i <= 1; i++) {
-		  for (int j = -1; j <= 1; j++) {
-			  if (tempRow+i >= 0 && tempRow+i < m_row && tempCol+j >= 0 && tempCol+j < m_col && Bboard[tempRow+i][tempCol+j] != "M") {
-				  if (Bboard[tempRow+i][tempCol+j] == "□") {
-					  Bboard[tempRow+i][tempCol+j] = "1";
-				  }
-				  else {
-					int bombCnt = stoi(Bboard[tempRow+i][tempCol+j]);
-					bombCnt++;
-					Bboard[tempRow+i][tempCol+j] = to_string(bombCnt);
-				  }
-			  }
-		  }
-	  }
-=======
-	    for (int i = -1; i <= 1; i++) 
-      {
-		    for (int j = -1; j <= 1; j++) 
+	Bboard[tempRow][tempCol] = "M";
+	count++;
+	for (int i = -1; i <= 1; i++) 
+	{
+	for (int j = -1; j <= 1; j++) 
         {
-			    if (tempRow+i >= 0 && tempRow+i < m_row && tempCol+j >= 0 && tempCol+j < m_col && Bboard[tempRow+i][tempCol+j] != "M")
-          {
-				    if (Bboard[tempRow+i][tempCol+j] == "■") 
-            {
-					    Bboard[tempRow+i][tempCol+j] = "1";
-				    }
-				    else 
-            {
-					    stringstream strmIN(Bboard[tempRow+i][tempCol+j]);
-					    stringstream strmOUT;
-					    int bombCnt;
-					    strmIN >> bombCnt;
-					    bombCnt++;
-					    strmOUT << bombCnt;
-					    Bboard[tempRow+i][tempCol+j] = strmOUT.str();
+		if (tempRow+i >= 0 && tempRow+i < m_row && tempCol+j >= 0 && tempCol+j < m_col && Bboard[tempRow+i][tempCol+j] != "M")
+          	{
+			if (Bboard[tempRow+i][tempCol+j] == "□") 
+            		{
+				Bboard[tempRow+i][tempCol+j] = "1";
+			}
+			else 
+            		{
+				int bombCnt = stoi(Bboard[tempRow+i][tempCol+j]);
+				bombCnt++;
+				Bboard[tempRow+i][tempCol+j] = to_string(bombCnt);
 				    }
 			    }
 		    }
 	    }
->>>>>>> fe5c95b1e30df02d8660324578c1d5109f7b98b4
     }
   }
 }
