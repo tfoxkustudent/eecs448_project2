@@ -329,7 +329,6 @@ void Executive::run()
 						if(playchoice=='Y' || playchoice=='y')
 						{
 							sweep = create();
-							m_flag=0;
 						}
 						else
 						{
@@ -337,7 +336,10 @@ void Executive::run()
 							break;
 						}
 				    }
-					m_flag++;
+					else
+					{
+						m_flag++;
+					}
 				}
 				catch(std::runtime_error &e)
 				{
