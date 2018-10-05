@@ -392,6 +392,7 @@ void Minesweeper::Helping(int Row, int Col)  //little helper function
           {
             Sboard[Row+i][Col+j]= Uboard[Row+i][Col+j]; //If space is empty, uses Uboard to account for revealing
           }
+          ++Row;
         }
       }
     }
