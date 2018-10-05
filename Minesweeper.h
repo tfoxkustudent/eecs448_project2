@@ -54,6 +54,10 @@ private:
 **/
   string** Bboard;// The board to store the position of mines.
 
+/**
+ * a 2D array of strings
+ * privately stores the representation of the helper's board
+**/
   string** Sboard;
 
 /**
