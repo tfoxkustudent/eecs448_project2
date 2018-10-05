@@ -83,6 +83,7 @@ void Minesweeper::setMines()
     {
       Bboard[tempRow][tempCol] = "M";
       count++;
+<<<<<<< HEAD
 	  for (int i = -1; i <= 1; i++) {
 		  for (int j = -1; j <= 1; j++) {
 			  if (tempRow+i >= 0 && tempRow+i < m_row && tempCol+j >= 0 && tempCol+j < m_col && Bboard[tempRow+i][tempCol+j] != "M") {
@@ -97,6 +98,31 @@ void Minesweeper::setMines()
 			  }
 		  }
 	  }
+=======
+	    for (int i = -1; i <= 1; i++) 
+      {
+		    for (int j = -1; j <= 1; j++) 
+        {
+			    if (tempRow+i >= 0 && tempRow+i < m_row && tempCol+j >= 0 && tempCol+j < m_col && Bboard[tempRow+i][tempCol+j] != "M")
+          {
+				    if (Bboard[tempRow+i][tempCol+j] == "■") 
+            {
+					    Bboard[tempRow+i][tempCol+j] = "1";
+				    }
+				    else 
+            {
+					    stringstream strmIN(Bboard[tempRow+i][tempCol+j]);
+					    stringstream strmOUT;
+					    int bombCnt;
+					    strmIN >> bombCnt;
+					    bombCnt++;
+					    strmOUT << bombCnt;
+					    Bboard[tempRow+i][tempCol+j] = strmOUT.str();
+				    }
+			    }
+		    }
+	    }
+>>>>>>> fe5c95b1e30df02d8660324578c1d5109f7b98b4
     }
   }
 }
@@ -243,28 +269,29 @@ void Minesweeper::print(int option)
 
 	for(int i=0; i<m_row; i++)
 	{
-
-    		if(i<10)
-    		{
-     			 cout<<i<<"   ";
-    		}
-    		else
-    		{
-      			cout<<i<<"  ";
-    		}
+    if(i<10)
+    {
+    	cout<<i<<"   ";
+    }
+    else
+    {
+    	cout<<i<<"  ";
+    }
 		for(int j=0; j<m_col; j++)
 		{
-      		if(option==2&&Bboard[i][j]=="M")//Print mines when user lose the game.
+      if(option==2&&Bboard[i][j]=="M")//Print mines when user lose the game.
 			{
-        		cout<<"M"<<"   ";
-      		}
-			else if (option == 3) {
+        cout<<"M"<<"   ";
+      }
+			else if (option == 3) 
+      {
 				cout << Bboard[i][j] << "   ";
 			}
-      else if (option == 4){
+      else if (option == 4)
+      {
         cout << Sboard[i][j] << "   ";
       }
-     		else
+     	else
 			{
 				cout<<Uboard[i][j]<<"   ";
 			}
@@ -312,105 +339,109 @@ int Minesweeper::getColMax()
 
 void Minesweeper::Helping(int Row, int Col)  //little helper function
 {
-      bool done = false;
-      std::string helpermove;
-      for (int i = 0; i < getRowMax(); i++)
+  bool done = false;
+  std::string helpermove;
+  for (int i = 0; i < getRowMax(); i++)
+  {
+    for (int j = 0; j < getColMax(); j++)
+    {
+      Sboard[i][j]= Uboard[i][j];
+    }
+  }
+
+  while(done!= true)
+  {
+    Sboard[Row][Col] = "$";
+    for (int i = -1; i <= 1; i++)
+    {
+      for (int j = -1; j <= 1; j++)
       {
-        for (int j = 0; j < getColMax(); j++)
+  	    if (Sboard[Row+i][Col+j] != "$")
         {
-          Sboard[i][j]= Uboard[i][j];
-        }
-      }
-
-      while(done!= true)
-      {
-        Sboard[Row][Col] = "$";
-        for (int i = -1; i <= 1; i++)
-        {
-   		    for (int j = -1; j <= 1; j++)
+          if(Bboard[Row+i][Col+j] != "■")
           {
-   			    if (Sboard[Row+i][Col+j] != "$")
-            {
-              Sboard[Row+i][Col+j]= Bboard[Row+i][Col+j];
-            }
+            Sboard[Row+i][Col+j]= Bboard[Row+i][Col+j];
           }
-        }
-        print(4);
-        std::cout<< "Please enter command to move your little helper \n a: for left \n w: for up \n d: for left \n s: for down \n x: to leave helper mode \n";
-        std::cin>> helpermove;
-        helpermove=std::toupper(helpermove[0]);
-        Sboard[Row][Col] = Bboard[Row][Col];
-        if(helpermove == "A")
-        {
-           if(Col==1)
-           {
-             cout << "You can not move to the edge, you might fall off\n";
-             continue;
-           }
-
-          for (int i = -1; i <= 1; i++)
+          else
           {
-            Sboard[Row+i][Col]= Uboard[Row+i][Col];
-          }
-          --Col;
-        }
-        else if(helpermove == "W")
-        {
-          if(Row==1)
-          {
-            cout << "You can not move to the edge, you might fall off\n";
-            continue;
-          }
-
-          for (int i = -1; i <= 1; i++)
-          {
-            Sboard[Row][Col+i]= Uboard[Row][Col+i];
-          }
-          --Row;
-        }
-        else if(helpermove == "S")
-        {
-          if(Row==getRowMax()-2)
-          {
-            cout << "You can not move to the edge, you might fall off\n";
-            continue;
-          }
-
-          for (int i = -1; i <= 1; i++)
-          {
-            Sboard[Row][Col+i]= Uboard[Row][Col+i];
+            Sboard[Row+i][Col+j]= Uboard[Row+i][Col+j]; //If space is empty, uses Uboard to account for revealing
           }
           ++Row;
         }
-        else if(helpermove == "D")
+      }
+    }
+    print(4);
+    std::cout<< "Please enter command to move your little helper \n a: for left \n w: for up \n d: for left \n s: for down \n x: to leave helper mode \n";
+    std::cin>> helpermove;
+    helpermove=std::toupper(helpermove[0]);
+    Sboard[Row][Col] = Bboard[Row][Col];
+    if(helpermove == "A")
+    {
+      if(Col==1)
+      {
+        cout << "You can not move to the edge, you might fall off\n";
+        continue;
+      }
+      --Col;
+      for (int i = -1; i <= 1; i++)
+      {
+        Sboard[Row+i][Col]= Uboard[Row+i][Col];
+      }
+    }
+    else if(helpermove == "W")
+    {
+      if(Row==1)
+      {
+        cout << "You can not move to the edge, you might fall off\n";
+        continue;
+      }
+      --Row;
+      for (int i = -1; i <= 1; i++)
+      {
+        Sboard[Row][Col+i]= Uboard[Row][Col+i];
+      }
+    }
+    else if(helpermove == "S")
+    {
+      if(Row==getRowMax()-2)
+      {
+        cout << "You can not move to the edge, you might fall off\n";
+        continue;
+      }
+      ++Row;
+      for (int i = -1; i <= 1; i++)
+      {
+        Sboard[Row][Col+i]= Uboard[Row][Col+i];
+      }
+    }
+    else if(helpermove == "D")
+    {
+      if(Col==getColMax()-2)
+      {
+        cout << "You can not move to the edge, you might fall off\n";
+        continue;
+      }
+      ++Col;
+      for (int i = -1; i <= 1; i++)
+      {
+        Sboard[Row+i][Col]= Uboard[Row+i][Col];
+      }
+    }
+    else if(helpermove=="X")
+    {
+      for (int i = -1; i <= 1; i++)
+      {
+        for (int j = -1; j <= 1; j++)
         {
-          if(Col==getColMax()-2)
-          {
-            cout << "You can not move to the edge, you might fall off\n";
-            continue;
-          }
-
-          for (int i = -1; i <= 1; i++)
-          {
-            Sboard[Row+i][Col]= Uboard[Row+i][Col];
-          }
-          ++Col;
-        }
-        else if(helpermove=="X")
-        {
-          for (int i = -1; i <= 1; i++)
-          {
-            for (int j = -1; j <= 1; j++)
-            {
-              Sboard[Row+i][Col+j]= Uboard[Row+i][Col+j];
-            }
-          }
-          done= true;
-        }
-        else
-        {
-          cout << "Invalid command, try again.\n";
+          Sboard[Row+i][Col+j]= Uboard[Row+i][Col+j];
         }
       }
+      done= true;
+    }
+    else
+    {
+      cout << "Invalid command, try again.\n";
+    }
+  }
 }
  //end little helper function
