@@ -379,7 +379,14 @@ void Minesweeper::Helping(int Row, int Col)  //little helper function
           {
    			    if (Sboard[Row+i][Col+j] != "$")
             {
-              Sboard[Row+i][Col+j]= Bboard[Row+i][Col+j];
+              if(Bboard[Row+i][Col+j] != "■")
+              {
+                Sboard[Row+i][Col+j]= Bboard[Row+i][Col+j];
+              }
+              else
+              {
+                Sboard[Row+i][Col+j]= Uboard[Row+i][Col+j]; //If space is empty, uses Uboard to account for revealing
+              }
             }
           }
         }

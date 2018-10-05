@@ -17,15 +17,29 @@ std::shared_ptr<Minesweeper> Executive::create()
 {
 	int maxMines=0;
 
-		int row=0;
-		int col=0;
-		int mines=0;
+	int row=0;
+	int col=0;
+	int mines=0;
 
 
-		std::cout<<"Enter the number of rows you would like: ";
-		std::cin>>row;
+	std::cout<<"Enter the number of rows you would like: ";
+	std::cin>>row;
 
 /*--------------------------------------------------------------------rows failbit------------------------------------------------------------------*/
+
+	while(std::cin.fail()) //failbit
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout<<"Please enter a number!\n Row:";
+		std::cin>>row;
+		std::cout<<endl;
+	}			//end failbit
+
+	while(row<2|| row>40)   //checks to see if row is in bounds
+	{
+		std::cout<<"The number of rows you provided is out of bounds. The lower bound is 2 and the upper bound is 4.\n Enter # of rows: ";
+		std::cin>>row;
 
 		while(std::cin.fail()) //failbit
 		{
@@ -36,51 +50,34 @@ std::shared_ptr<Minesweeper> Executive::create()
 			std::cout<<endl;
 		}			//end failbit
 
-		while(row<2|| row>40)   //checks to see if row is in bounds
-		{
-			std::cout<<"The number of rows you provided is out of bounds. The lower bound is 2 and the upper bound is 4.\n Enter # of rows: ";
-			std::cin>>row;
+	}
 
-
-
-			while(std::cin.fail()) //failbit
-			{
-				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				std::cout<<"Please enter a number!\n Row:";
-				std::cin>>row;
-				std::cout<<endl;
-			}			//end failbit
-
-		}
-
-		std::cout<<"Enter the number of columns you would like: ";
-		std::cin>>col;
+	std::cout<<"Enter the number of columns you would like: ";
+	std::cin>>col;
 
 /*--------------------------------------------------------------------columns failbit------------------------------------------------------------------*/
+	while(std::cin.fail()) //failbit
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout<<"Please enter a number!\n Col:";
+		std::cin>>col;
+		std::cout<<endl;
+	}			//end failbit
+
+	while(col<2|| col>40)   //checks to see if row is in bounds
+	{
+		std::cout<<"The number of columns you provided is out of bounds. The lower bound is 2 and the upper bound is 4.\n Enter # of columns: ";
+		std::cin>>col;
 		while(std::cin.fail()) //failbit
 		{
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout<<"Please enter a number!\n Col:";
+			std::cout<<"Please enter a number!\n Row:";
 			std::cin>>col;
 			std::cout<<endl;
 		}			//end failbit
-
-		while(col<2|| col>40)   //checks to see if row is in bounds
-		{
-			std::cout<<"The number of columns you provided is out of bounds. The lower bound is 2 and the upper bound is 4.\n Enter # of columns: ";
-			std::cin>>col;
-
-			while(std::cin.fail()) //failbit
-			{
-				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				std::cout<<"Please enter a number!\n Row:";
-				std::cin>>col;
-				std::cout<<endl;
-			}			//end failbit
-		}
+	}
 
 
 	maxMines=(row*col)-1;
@@ -98,15 +95,10 @@ std::shared_ptr<Minesweeper> Executive::create()
 		std::cout<<endl;
 	}			//end failbit
 
-
-
-
 	while(mines<1 || mines>maxMines)   //checks to see if row is in bounds
 	{
 		std::cout<<"The number of mines you provided is out of bounds. The lower bound is 1 and the upper bound is "<<maxMines<<"\n Enter # of mines: ";
 		std::cin>>mines;
-
-
 
 		while(std::cin.fail()) //failbit
 		{
@@ -123,7 +115,6 @@ std::shared_ptr<Minesweeper> Executive::create()
 
 void Executive::run()
 {
-
 	std::cout<<"Welcome to Minesweeper!\n";
 	sweep = create();
 	int row=0;
@@ -132,18 +123,17 @@ void Executive::run()
 
 	while(true)
 	{
-
-		if (choice == "C") {
+		if (choice == "C") 
+		{
 			sweep->print(3);
 		}
-
-		else {
+		else 
+		{
 			sweep->print(1);
 		}
 
 		std::cout<<"Please make your selection:\n1)R(Reveal)\n2)F(Flag)\n3)U(Unflag)\n4)C(Cheat)\n5)H(Little Helper)\n6)E(Exit)\n";
 		std::cout<<"You have "<<(sweep->getMines()-m_flag)<<" flag(s) can be used.\n";
-
 
 		std::cin>>choice;
 
@@ -165,7 +155,6 @@ void Executive::run()
 		choice=std::toupper(choice[0]);
 
 /*---------------------------------------------------------------------------------Exit--------------------------------------------------------------------------------------------------*/
-
 
 		if(choice=="E")
 		{
@@ -190,15 +179,10 @@ void Executive::run()
 				std::cout<<endl;
 			}			//end failbit
 
-
-
-
 			while(row>=sweep->getRowMax() || row<0)   //checks to see if row is in bounds
 			{
 				std::cout<<"The row you provided is out of bounds. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
 				std::cin>>row;
-
-
 
 				while(std::cin.fail()) //failbit
 				{
@@ -209,15 +193,9 @@ void Executive::run()
 					std::cout<<endl;
 				}			//end failbit
 
-
-
-
 			}
 			std::cout<<"Please enter your column:";
 			std::cin>>col;
-
-
-
 
 			while(std::cin.fail())   //failbit
 			{
@@ -228,14 +206,10 @@ void Executive::run()
 				std::cout<<endl;
 			}			//end failbit
 
-
-
 			while(col>=sweep->getColMax() || col<0)  //checks to see if col is in bounds
 			{
 				std::cout<<"The column you provided is out of bounds. The max column you can select is "<< sweep->getColMax()-1<<"\nCol:";
 				std::cin>>col;
-
-
 
 				while(std::cin.fail()) //failbit
 				{
@@ -245,8 +219,6 @@ void Executive::run()
 					std::cin>>col;
 					std::cout<<endl;
 				}			//end failbit
-
-
 
 			}
 			try
@@ -275,6 +247,7 @@ void Executive::run()
 					if(playChoice=='Y' || playChoice=='y')
 					{
 						sweep = create();
+						m_flag=0;
 					}
 					else
 					{
@@ -290,9 +263,7 @@ void Executive::run()
 
 		}
 
-
 /*-------------------------------------------------------------------------------Flagging----------------------------------------------------------------------------------------------------*/
-
 
 		else if(choice=="F")  //Flag
 		{
@@ -312,8 +283,6 @@ void Executive::run()
                         std::cout<<"The row you provided is out of bounds. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
                         std::cin>>row;
 
-
-
                         while(std::cin.fail()) //failbit
                         {
                             std::cin.clear();
@@ -329,8 +298,6 @@ void Executive::run()
                     {
                         std::cout<<"The column you provided is out of bounds. The max column you can select is "<< sweep->getColMax()-1<<"\nCol:";
                         std::cin>>col;
-
-
 
                         while(std::cin.fail()) //failbit
                         {
@@ -361,6 +328,7 @@ void Executive::run()
 						if(playchoice=='Y' || playchoice=='y')
 						{
 							sweep = create();
+							m_flag=0;
 						}
 						else
 						{
@@ -368,7 +336,7 @@ void Executive::run()
 							break;
 						}
 				    }
-			m_flag++;
+					m_flag++;
 				}
 				catch(std::runtime_error &e)
 				{
@@ -386,9 +354,6 @@ void Executive::run()
 			std::cout<<"Please enter your row:";
 			std::cin>>row;
 
-
-
-
 			while(std::cin.fail()) //failbit
 			{
 				std::cin.clear();
@@ -398,16 +363,10 @@ void Executive::run()
 				std::cout<<endl;
 			}			//end failbit
 
-
-
-
-
 			while(row>sweep->getRowMax() || row<0)   //checks to see if row is in bounds
 			{
 				std::cout<<"The row you provided is out of bounds. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
 				std::cin>>row;
-
-
 
 				while(std::cin.fail()) //failbit
 				{
@@ -418,14 +377,9 @@ void Executive::run()
 					std::cout<<endl;
 				}			//end failbit
 
-
-
 			}
 			std::cout<<"Please enter your column:";
 			std::cin>>col;
-
-
-
 
 			while(std::cin.fail())   //failbit
 			{
@@ -436,15 +390,10 @@ void Executive::run()
 				std::cout<<endl;
 			}			//end failbit
 
-
-
-
 			while(col>sweep->getColMax() || col<0)   //checks to see if col is in bounds
 			{
 				std::cout<<"The column you provided is out of bounds. The max column you can select is "<< sweep->getColMax()-1<<"\nCol:";
 				std::cin>>col;
-
-
 
 				while(std::cin.fail()) //failbit
 				{
@@ -454,8 +403,6 @@ void Executive::run()
 					std::cin>>col;
 					std::cout<<endl;
 				}			//end failbit
-
-
 
 			}
 			try
@@ -469,34 +416,10 @@ void Executive::run()
 			}
 		}
 
-
-
-	else if(choice=="H")   //little helper
-	{
-
-		std::cout<<"Please enter your row:";
-		std::cin>>row;
-
-
-
-		while(std::cin.fail()) //failbit
+		else if(choice=="H")   //little helper
 		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout<<"Please enter a number!\n Row:";
+			std::cout<<"Please enter your row:";
 			std::cin>>row;
-			std::cout<<endl;
-		}			//end failbit
-
-
-
-
-		while(row>=sweep->getRowMax()-1 || row<=0)   //checks to see if row is in bounds
-		{
-			std::cout<<"The row you provided is of bounds. You can't stand on the edge, your helper might fall off. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
-			std::cin>>row;
-
-
 
 			while(std::cin.fail()) //failbit
 			{
@@ -508,34 +431,25 @@ void Executive::run()
 			}			//end failbit
 
 
+			while(row>=sweep->getRowMax()-1 || row<=0)   //checks to see if row is in bounds
+			{
+				std::cout<<"The row you provided is of bounds. You can't stand on the edge, your helper might fall off. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
+				std::cin>>row;
 
+				while(std::cin.fail()) //failbit
+				{
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					std::cout<<"Please enter a number!\n Row:";
+					std::cin>>row;
+					std::cout<<endl;
+				}			//end failbit
 
-		}
-		std::cout<<"Please enter your column:";
-		std::cin>>col;
-
-
-
-
-		while(std::cin.fail())   //failbit
-		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout<<"Please enter a number!\n Col:";
-			std::cin>>col;
-			std::cout<<endl;
-		}			//end failbit
-
-
-
-		while(col>=sweep->getColMax()-1 || col<=0)  //checks to see if col is in bounds
-		{
-			std::cout<<"The column you provided is out of bounds. You can't stand on the edge, your helper might fall off. The max column you can select is "<< sweep->getColMax()-1<<"\nCol:";
+			}
+			std::cout<<"Please enter your column:";
 			std::cin>>col;
 
-
-
-			while(std::cin.fail()) //failbit
+			while(std::cin.fail())   //failbit
 			{
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -544,22 +458,31 @@ void Executive::run()
 				std::cout<<endl;
 			}			//end failbit
 
+			while(col>=sweep->getColMax()-1 || col<=0)  //checks to see if col is in bounds
+			{
+				std::cout<<"The column you provided is out of bounds. You can't stand on the edge, your helper might fall off. The max column you can select is "<< sweep->getColMax()-1<<"\nCol:";
+				std::cin>>col;
 
+				while(std::cin.fail()) //failbit
+				{
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					std::cout<<"Please enter a number!\n Col:";
+					std::cin>>col;
+					std::cout<<endl;
+				}			//end failbit
+
+			}
+			try
+			{
+				sweep->Helping(row,col);
+
+			}
+			catch(std::runtime_error &e)
+			{
+				std::cout<<e.what();
+			}
 
 		}
-		try
-		{
-			sweep->Helping(row,col);
-
-
-
-
-		}
-		catch(std::runtime_error &e)
-		{
-			std::cout<<e.what();
-		}
-
 	}
-}
 }
