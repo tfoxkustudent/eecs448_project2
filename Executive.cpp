@@ -39,7 +39,7 @@ std::shared_ptr<Minesweeper> Executive::create()
 
 	while(row<2|| row>40)   //checks to see if row is in bounds
 	{
-		std::cout<<"The number of rows you provided is out of bounds. The lower bound is 2 and the upper bound is 4.\n Enter # of rows: ";
+		std::cout<<"The number of rows you provided is out of bounds. The lower bound is 2 and the upper bound is 40.\n Enter # of rows: ";
 		std::cin>>row;
 
 		while(std::cin.fail()) //failbit
@@ -68,7 +68,7 @@ std::shared_ptr<Minesweeper> Executive::create()
 
 	while(col<2|| col>40)   //checks to see if row is in bounds
 	{
-		std::cout<<"The number of columns you provided is out of bounds. The lower bound is 2 and the upper bound is 4.\n Enter # of columns: ";
+		std::cout<<"The number of columns you provided is out of bounds. The lower bound is 2 and the upper bound is 40.\n Enter # of columns: ";
 		std::cin>>col;
 		while(std::cin.fail()) //failbit
 		{
@@ -434,7 +434,7 @@ void Executive::run()
 
 			while(row>=sweep->getRowMax()-1 || row<=0)   //checks to see if row is in bounds
 			{
-				std::cout<<"The row you provided is of bounds. You can't stand on the edge, your helper might fall off. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
+				std::cout<<"The row you provided is out of bounds. You can't stand on the edge, your helper might fall off. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
 				std::cin>>row;
 
 				while(std::cin.fail()) //failbit
