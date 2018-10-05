@@ -9,3 +9,6 @@ Executive.o: Executive.h Executive.cpp
 
 clean:
 	rm *.o e1
+
+memcheck:
+	valgrind --leak-check=full --show-leak-kinds=all -v ./e1
