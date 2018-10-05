@@ -124,11 +124,11 @@ void Executive::run()
 
 	while(true)
 	{
-		if (choice == "C") 
+		if (choice == "C")
 		{
 			sweep->print(3);
 		}
-		else 
+		else
 		{
 			sweep->print(1);
 		}
@@ -434,7 +434,7 @@ void Executive::run()
 
 			while(row>=sweep->getRowMax()-1 || row<=0)   //checks to see if row is in bounds
 			{
-				std::cout<<"The row you provided is of bounds. You can't stand on the edge, your helper might fall off. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
+				std::cout<<"The row you provided is out of bounds. You can't stand on the edge, your helper might fall off. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
 				std::cin>>row;
 
 				while(std::cin.fail()) //failbit
