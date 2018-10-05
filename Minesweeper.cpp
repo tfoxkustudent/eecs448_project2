@@ -320,14 +320,6 @@ void Minesweeper::Helping(int Row, int Col)  //little helper function
 {
   bool done = false;
   std::string helpermove;
-  for (int i = 0; i < getRowMax(); i++)
-  {
-    for (int j = 0; j < getColMax(); j++)
-    {
-      Sboard[i][j]= Uboard[i][j];
-    }
-  }
-
   while(done!= true)
   {
     Sboard[Row][Col] = "$";
@@ -335,17 +327,9 @@ void Minesweeper::Helping(int Row, int Col)  //little helper function
     {
       for (int j = -1; j <= 1; j++)
       {
-  	    if (Sboard[Row+i][Col+j] != "$")
+  	if (Sboard[Row+i][Col+j] != "$")
         {
-          if(Bboard[Row+i][Col+j] != "■")
-          {
-            Sboard[Row+i][Col+j]= Bboard[Row+i][Col+j];
-          }
-          else
-          {
-            Sboard[Row+i][Col+j]= Uboard[Row+i][Col+j]; //If space is empty, uses Uboard to account for revealing
-          }
-          ++Row;
+          Sboard[Row+i][Col+j]= Bboard[Row+i][Col+j];
         }
       }
     }
@@ -361,10 +345,10 @@ void Minesweeper::Helping(int Row, int Col)  //little helper function
         cout << "You can not move to the edge, you might fall off\n";
         continue;
       }
-      --Col;
+      Col--;
       for (int i = -1; i <= 1; i++)
       {
-        Sboard[Row+i][Col]= Uboard[Row+i][Col];
+        Sboard[Row+i][Col+2]= Uboard[Row+i][Col+2];
       }
     }
     else if(helpermove == "W")
@@ -374,10 +358,10 @@ void Minesweeper::Helping(int Row, int Col)  //little helper function
         cout << "You can not move to the edge, you might fall off\n";
         continue;
       }
-      --Row;
+      Row--;
       for (int i = -1; i <= 1; i++)
       {
-        Sboard[Row][Col+i]= Uboard[Row][Col+i];
+        Sboard[Row+2][Col+i]= Uboard[Row+2][Col+i];
       }
     }
     else if(helpermove == "S")
@@ -387,10 +371,10 @@ void Minesweeper::Helping(int Row, int Col)  //little helper function
         cout << "You can not move to the edge, you might fall off\n";
         continue;
       }
-      ++Row;
+      Row++;
       for (int i = -1; i <= 1; i++)
       {
-        Sboard[Row][Col+i]= Uboard[Row][Col+i];
+        Sboard[Row-2][Col+i]= Uboard[Row-2][Col+i];
       }
     }
     else if(helpermove == "D")
@@ -400,10 +384,10 @@ void Minesweeper::Helping(int Row, int Col)  //little helper function
         cout << "You can not move to the edge, you might fall off\n";
         continue;
       }
-      ++Col;
+      Col++;
       for (int i = -1; i <= 1; i++)
       {
-        Sboard[Row+i][Col]= Uboard[Row+i][Col];
+        Sboard[Row+i][Col-2]= Uboard[Row+i][Col-2];
       }
     }
     else if(helpermove=="X")
