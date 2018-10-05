@@ -1,0 +1,243 @@
+\hypertarget{class_minesweeper}{}\section{Minesweeper Class Reference}
+\label{class_minesweeper}\index{Minesweeper@{Minesweeper}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_minesweeper_a9cb58f108f5f65317c5f7d60ead4e7ec}{Minesweeper}} (int Row, int Col, int Num\+Of\+Mines)
+\item 
+\mbox{\hyperlink{class_minesweeper_a79c2fcb860d486113e1b557e34dbb67d}{$\sim$\+Minesweeper}} ()
+\item 
+void \mbox{\hyperlink{class_minesweeper_a8abe207bf94f14d33c10dc88410e6f8c}{print}} (int option)
+\item 
+bool \mbox{\hyperlink{class_minesweeper_a4da8ec9ff58f3e663eed64ab70d523be}{Revealing}} (int Row, int Col)
+\begin{DoxyCompactList}\small\item\em un\+Marking is the function that deals with revealing \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_minesweeper_a8ac0c88846a50058ac722e4e9df5afaa}{Marking}} (int Row, int Col)
+\begin{DoxyCompactList}\small\item\em Marking is the function that deals with flagging. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_minesweeper_ad15ef447b75d2e8775eee43c493d29f4}{un\+Marking}} (int Row, int Col)
+\begin{DoxyCompactList}\small\item\em un\+Marking is the function that deals with unflagging \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_minesweeper_a7bb8b53ca69cd4959e5123a07047702f}{Reset}} ()
+\begin{DoxyCompactList}\small\item\em Reset creates a new board with the same dimensions but randomizes the placement of the mines. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_minesweeper_aad4e9c313183fa9eeb90cef65f325026}{get\+Row\+Max}} ()
+\begin{DoxyCompactList}\small\item\em Returns max number of rows in board. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_minesweeper_a3242aa1da6bd80bf7a94d7b4c5ca743a}{get\+Col\+Max}} ()
+\begin{DoxyCompactList}\small\item\em Returns max number of columns in board. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_minesweeper_a3ea6ef07c7a730c815ff62d213ca72af}{get\+Mines}} ()
+\begin{DoxyCompactList}\small\item\em Returns number of mines. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_minesweeper_a563e151311a5b9965f523a5faaf13124}{Helping}} (int Row, int Col)
+\begin{DoxyCompactList}\small\item\em Returns Character and surround spaces. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_minesweeper_a9cb58f108f5f65317c5f7d60ead4e7ec}\label{class_minesweeper_a9cb58f108f5f65317c5f7d60ead4e7ec}} 
+\index{Minesweeper@{Minesweeper}!Minesweeper@{Minesweeper}}
+\index{Minesweeper@{Minesweeper}!Minesweeper@{Minesweeper}}
+\subsubsection{\texorpdfstring{Minesweeper()}{Minesweeper()}}
+{\footnotesize\ttfamily Minesweeper\+::\+Minesweeper (\begin{DoxyParamCaption}\item[{int}]{Row,  }\item[{int}]{Col,  }\item[{int}]{Num\+Of\+Mines }\end{DoxyParamCaption})}
+
+\begin{DoxyPrecond}{Precondition}
+Null. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Create two boards with the input rows and colns and sets the mines on Bboard. 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em row} & the target position\textquotesingle{}s row (int) \\
+\hline
+{\em the} & target position\textquotesingle{}s column (int) \\
+\hline
+{\em Numof\+Mines} & Number of mines the user wants (int). Exclusively between 1 and row$\ast$col -\/ 1 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_minesweeper_a79c2fcb860d486113e1b557e34dbb67d}\label{class_minesweeper_a79c2fcb860d486113e1b557e34dbb67d}} 
+\index{Minesweeper@{Minesweeper}!````~Minesweeper@{$\sim$\+Minesweeper}}
+\index{````~Minesweeper@{$\sim$\+Minesweeper}!Minesweeper@{Minesweeper}}
+\subsubsection{\texorpdfstring{$\sim$\+Minesweeper()}{~Minesweeper()}}
+{\footnotesize\ttfamily Minesweeper\+::$\sim$\+Minesweeper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyPrecond}{Precondition}
+Null. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+destroys board and clears memory 
+\end{DoxyPostcond}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_minesweeper_a3242aa1da6bd80bf7a94d7b4c5ca743a}\label{class_minesweeper_a3242aa1da6bd80bf7a94d7b4c5ca743a}} 
+\index{Minesweeper@{Minesweeper}!get\+Col\+Max@{get\+Col\+Max}}
+\index{get\+Col\+Max@{get\+Col\+Max}!Minesweeper@{Minesweeper}}
+\subsubsection{\texorpdfstring{get\+Col\+Max()}{getColMax()}}
+{\footnotesize\ttfamily int Minesweeper\+::get\+Col\+Max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns max number of columns in board. 
+
+\begin{DoxyPrecond}{Precondition}
+N\+O\+NE 
+\end{DoxyPrecond}
+\begin{DoxyReturn}{Returns}
+number of columns in board 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_minesweeper_a3ea6ef07c7a730c815ff62d213ca72af}\label{class_minesweeper_a3ea6ef07c7a730c815ff62d213ca72af}} 
+\index{Minesweeper@{Minesweeper}!get\+Mines@{get\+Mines}}
+\index{get\+Mines@{get\+Mines}!Minesweeper@{Minesweeper}}
+\subsubsection{\texorpdfstring{get\+Mines()}{getMines()}}
+{\footnotesize\ttfamily int Minesweeper\+::get\+Mines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns number of mines. 
+
+\begin{DoxyPrecond}{Precondition}
+N\+O\+NE 
+\end{DoxyPrecond}
+\begin{DoxyReturn}{Returns}
+number of rnumber of mines 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_minesweeper_aad4e9c313183fa9eeb90cef65f325026}\label{class_minesweeper_aad4e9c313183fa9eeb90cef65f325026}} 
+\index{Minesweeper@{Minesweeper}!get\+Row\+Max@{get\+Row\+Max}}
+\index{get\+Row\+Max@{get\+Row\+Max}!Minesweeper@{Minesweeper}}
+\subsubsection{\texorpdfstring{get\+Row\+Max()}{getRowMax()}}
+{\footnotesize\ttfamily int Minesweeper\+::get\+Row\+Max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns max number of rows in board. 
+
+\begin{DoxyPrecond}{Precondition}
+N\+O\+NE 
+\end{DoxyPrecond}
+\begin{DoxyReturn}{Returns}
+number of rows in board 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_minesweeper_a563e151311a5b9965f523a5faaf13124}\label{class_minesweeper_a563e151311a5b9965f523a5faaf13124}} 
+\index{Minesweeper@{Minesweeper}!Helping@{Helping}}
+\index{Helping@{Helping}!Minesweeper@{Minesweeper}}
+\subsubsection{\texorpdfstring{Helping()}{Helping()}}
+{\footnotesize\ttfamily void Minesweeper\+::\+Helping (\begin{DoxyParamCaption}\item[{int}]{Row,  }\item[{int}]{Col }\end{DoxyParamCaption})}
+
+
+
+Returns Character and surround spaces. 
+
+\begin{DoxyPrecond}{Precondition}
+A valid Input location 
+\end{DoxyPrecond}
+\begin{DoxyReturn}{Returns}
+character and surrounding spaces 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_minesweeper_a8ac0c88846a50058ac722e4e9df5afaa}\label{class_minesweeper_a8ac0c88846a50058ac722e4e9df5afaa}} 
+\index{Minesweeper@{Minesweeper}!Marking@{Marking}}
+\index{Marking@{Marking}!Minesweeper@{Minesweeper}}
+\subsubsection{\texorpdfstring{Marking()}{Marking()}}
+{\footnotesize\ttfamily bool Minesweeper\+::\+Marking (\begin{DoxyParamCaption}\item[{int}]{Row,  }\item[{int}]{Col }\end{DoxyParamCaption})}
+
+
+
+Marking is the function that deals with flagging. 
+
+\begin{DoxyPrecond}{Precondition}
+A valid input position. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+spot is flagged 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em row} & the target position\textquotesingle{}s Row (int) \\
+\hline
+{\em col} & the target position\textquotesingle{}s column (int) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_minesweeper_a8abe207bf94f14d33c10dc88410e6f8c}\label{class_minesweeper_a8abe207bf94f14d33c10dc88410e6f8c}} 
+\index{Minesweeper@{Minesweeper}!print@{print}}
+\index{print@{print}!Minesweeper@{Minesweeper}}
+\subsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void Minesweeper\+::print (\begin{DoxyParamCaption}\item[{int}]{option }\end{DoxyParamCaption})}
+
+\begin{DoxyPrecond}{Precondition}
+Null. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Print the Uboard 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em Null.} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_minesweeper_a7bb8b53ca69cd4959e5123a07047702f}\label{class_minesweeper_a7bb8b53ca69cd4959e5123a07047702f}} 
+\index{Minesweeper@{Minesweeper}!Reset@{Reset}}
+\index{Reset@{Reset}!Minesweeper@{Minesweeper}}
+\subsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily void Minesweeper\+::\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reset creates a new board with the same dimensions but randomizes the placement of the mines. 
+
+\begin{DoxyPrecond}{Precondition}
+Null. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Reset the Uboard and Bboard and the game start over. 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em Null.} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_minesweeper_a4da8ec9ff58f3e663eed64ab70d523be}\label{class_minesweeper_a4da8ec9ff58f3e663eed64ab70d523be}} 
+\index{Minesweeper@{Minesweeper}!Revealing@{Revealing}}
+\index{Revealing@{Revealing}!Minesweeper@{Minesweeper}}
+\subsubsection{\texorpdfstring{Revealing()}{Revealing()}}
+{\footnotesize\ttfamily bool Minesweeper\+::\+Revealing (\begin{DoxyParamCaption}\item[{int}]{Row,  }\item[{int}]{Col }\end{DoxyParamCaption})}
+
+
+
+un\+Marking is the function that deals with revealing 
+
+\begin{DoxyPrecond}{Precondition}
+A valid input position. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+spot and potentially the spots around it are revealed. Game ends if spot is a mine 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em row} & the target position\textquotesingle{}s Row (int) \\
+\hline
+{\em col} & the target position\textquotesingle{}s column (int) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_minesweeper_ad15ef447b75d2e8775eee43c493d29f4}\label{class_minesweeper_ad15ef447b75d2e8775eee43c493d29f4}} 
+\index{Minesweeper@{Minesweeper}!un\+Marking@{un\+Marking}}
+\index{un\+Marking@{un\+Marking}!Minesweeper@{Minesweeper}}
+\subsubsection{\texorpdfstring{un\+Marking()}{unMarking()}}
+{\footnotesize\ttfamily void Minesweeper\+::un\+Marking (\begin{DoxyParamCaption}\item[{int}]{Row,  }\item[{int}]{Col }\end{DoxyParamCaption})}
+
+
+
+un\+Marking is the function that deals with unflagging 
+
+\begin{DoxyPrecond}{Precondition}
+A valid input position. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+spot is unflagged 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em row} & the target position\textquotesingle{}s Row (int) \\
+\hline
+{\em col} & the target position\textquotesingle{}s column (int) \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_minesweeper_8h}{Minesweeper.\+h}}\item 
+\mbox{\hyperlink{_minesweeper_8cpp}{Minesweeper.\+cpp}}\end{DoxyCompactItemize}
