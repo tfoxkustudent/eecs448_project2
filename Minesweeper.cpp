@@ -10,8 +10,6 @@
 #include "Minesweeper.h"
 #include <string>
 #include <exception>
-#include <sstream>
-#include <locale>
 using namespace std;
 
 
@@ -28,18 +26,12 @@ Minesweeper:: Minesweeper(int Row, int Col, int NumOfMines)
   //remaining = num;
 
   Uboard = new string* [m_row];
-  for (int i = 0; i < Row; i++)
-  {
-    Uboard[i] = new string [m_col];
-  }
   Bboard = new string*[m_row];
-  for (int i = 0; i < Row; i++)
-  {
-    Bboard[i] = new string[m_col];
-  }
   Sboard = new string*[m_row];
   for (int i = 0; i < Row; i++)
   {
+    Uboard[i] = new string [m_col];
+    Bboard[i] = new string[m_col];
     Sboard[i] = new string[m_col];
   }
   for(int i=0;i<m_row;i++)
@@ -47,7 +39,7 @@ Minesweeper:: Minesweeper(int Row, int Col, int NumOfMines)
     for(int j=0;j<m_col;j++)
     {
       Uboard[i][j]="■";
-      Bboard[i][j]="■";
+      Bboard[i][j]="□";
       Sboard[i][j]="■";
     }
   }
@@ -62,21 +54,12 @@ Minesweeper:: ~Minesweeper()
   for (int i = 0; i < m_row; i++)
   {
     delete[] Uboard[i];
+    delete[] Bboard[i];
+    delete[] Sboard[i];
   }
   delete[] Uboard;
-
-  for (int i = 0; i < m_row; i++)
-  {
-    delete[] Bboard[i];
-  }
   delete[] Bboard;
-
-
-for (int i = 0; i < m_row; i++)
-{
-  delete[] Sboard[i];
-}
-delete[] Sboard;
+  delete[] Sboard;
 }
 
 //end Destructor
@@ -103,17 +86,13 @@ void Minesweeper::setMines()
 	  for (int i = -1; i <= 1; i++) {
 		  for (int j = -1; j <= 1; j++) {
 			  if (tempRow+i >= 0 && tempRow+i < m_row && tempCol+j >= 0 && tempCol+j < m_col && Bboard[tempRow+i][tempCol+j] != "M") {
-				  if (Bboard[tempRow+i][tempCol+j] == "■") {
+				  if (Bboard[tempRow+i][tempCol+j] == "□") {
 					  Bboard[tempRow+i][tempCol+j] = "1";
 				  }
 				  else {
-					  stringstream strmIN(Bboard[tempRow+i][tempCol+j]);
-					  stringstream strmOUT;
-					  int bombCnt;
-					  strmIN >> bombCnt;
-					  bombCnt++;
-					  strmOUT << bombCnt;
-					  Bboard[tempRow+i][tempCol+j] = strmOUT.str();
+					int bombCnt = stoi(Bboard[tempRow+i][tempCol+j]);
+					bombCnt++;
+					Bboard[tempRow+i][tempCol+j] = to_string(bombCnt);
 				  }
 			  }
 		  }
@@ -196,39 +175,12 @@ bool Minesweeper::Revealing(int Row, int Col)
 }
 //end Revealing
 
-
-
-/*-------------------------------------------------------------------------------------------------Check-----------------------------------------------------------------------------------*/
-int Minesweeper::Check(int Row, int Col)
-{
-
-  int count=0;
-  //case i = 0 and j = 0 will never add to count as hitting mine will end game before check() is called
-  for(int i = -1; i <= 1; i++)//i for rows
-  {
-    for(int j = -1; j <= 1; j++)// j for cols
-    {
-      if(Row+i<m_row && Col+j < m_col && Row+i>=0 && Col+j>=0)
-      {
-        if(Bboard[Row+i][Col+j]=="M")
-        {
-          count++;
-        }
-      }
-    }
-  }
-  return(count);
-}
-//end Check
-
-
-
 /*-------------------------------------------------------------------------------------------------RecCheck-----------------------------------------------------------------------------------*/
 void Minesweeper::RecCheck(int Row, int Col)
 {
   if(Uboard[Row][Col]!="F")//makes sure flagged spots arn't revealed when being revealed from RecCheck. redundant check first time when being called from revealing()
   {
-    if(Check(Row,Col)==0 && Uboard[Row][Col]=="■")//Condition 1: There are no mines adjacent to the input position and this spot is in defalt status.
+    if(Bboard[Row][Col]=="□" && Uboard[Row][Col]=="■")//Condition 1: There are no mines adjacent to the input position and this spot is in defalt status.
     {
       Uboard[Row][Col]="□";
       Sboard[Row][Col]="□";
@@ -246,15 +198,15 @@ void Minesweeper::RecCheck(int Row, int Col)
     }
     else//Condition 2: There are mines adjacent to the input position.
     {
-      if(Check(Row,Col)==0)//This was set to prevent the situation the 0 will show on the board.
+      if(Bboard[Row][Col] == "□")//This was set to prevent the situation the 0 will show on the board.
       {
         Uboard[Row][Col]="□";
         Sboard[Row][Col]="□";
       }
       else
       {
-        Uboard[Row][Col]=to_string(Check(Row,Col));//set the spot to the number of the mines those are adjacent to it.
-        Sboard[Row][Col]=to_string(Check(Row,Col));
+        Uboard[Row][Col]=Bboard[Row][Col];//set the spot to the number of the mines those are adjacent to it.
+        Sboard[Row][Col]=Bboard[Row][Col];
       }
     }
   }
