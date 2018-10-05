@@ -54,6 +54,8 @@ private:
 **/
   string** Bboard;// The board to store the position of mines.
 
+  string** Sboard;
+
 /**
  * an integer
  * privately stores the number of flags
