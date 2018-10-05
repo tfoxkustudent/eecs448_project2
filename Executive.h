@@ -40,8 +40,16 @@ void run();
 **/
 int m_flag;
 
+/**
+ * a shared pointer
+ * privately stores the minesweeper board
+**/
 std::shared_ptr<Minesweeper> sweep;
 
+/**
+ * Handles user input to create new board
+ * @return shared pointer to new board
+**/
 std::shared_ptr<Minesweeper> create();
 };
 #endif
