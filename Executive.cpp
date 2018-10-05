@@ -20,6 +20,7 @@ std::shared_ptr<Minesweeper> Executive::create()
 		int row=0;
 		int col=0;
 		int mines=0;
+		m_flag=0;
 
 
 		std::cout<<"Enter the number of rows you would like: ";
