@@ -275,7 +275,7 @@ void Executive::run()
 				char playchoice=' ';
 				try
 				{
-					std::cout<<"Please enter your row:";
+					std::cout<<"Please enter your row: ";
 					std::cin>>row;
                     while(row>=sweep->getRowMax() || row<0)   //checks to see if row is in bounds
                     {
