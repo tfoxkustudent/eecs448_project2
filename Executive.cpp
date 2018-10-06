@@ -124,11 +124,11 @@ void Executive::run()
 
 	while(true)
 	{
-		if (choice == "C") 
+		if (choice == "C")
 		{
 			sweep->print(3);
 		}
-		else 
+		else
 		{
 			sweep->print(1);
 		}
@@ -329,6 +329,7 @@ void Executive::run()
 						if(playchoice=='Y' || playchoice=='y')
 						{
 							sweep = create();
+							m_flag=0;
 						}
 						else
 						{
@@ -336,10 +337,7 @@ void Executive::run()
 							break;
 						}
 				    }
-					else
-					{
-						m_flag++;
-					}
+					m_flag++;
 				}
 				catch(std::runtime_error &e)
 				{
@@ -366,7 +364,7 @@ void Executive::run()
 				std::cout<<endl;
 			}			//end failbit
 
-			while(row>sweep->getRowMax() || row<0)   //checks to see if row is in bounds
+			while(row>=sweep->getRowMax() || row<0)   //checks to see if row is in bounds
 			{
 				std::cout<<"The row you provided is out of bounds. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
 				std::cin>>row;
@@ -393,7 +391,7 @@ void Executive::run()
 				std::cout<<endl;
 			}			//end failbit
 
-			while(col>sweep->getColMax() || col<0)   //checks to see if col is in bounds
+			while(col>=sweep->getColMax() || col<0)   //checks to see if col is in bounds
 			{
 				std::cout<<"The column you provided is out of bounds. The max column you can select is "<< sweep->getColMax()-1<<"\nCol:";
 				std::cin>>col;
@@ -436,7 +434,7 @@ void Executive::run()
 
 			while(row>=sweep->getRowMax()-1 || row<=0)   //checks to see if row is in bounds
 			{
-				std::cout<<"The row you provided is out of bounds. You can't stand on the edge, your helper might fall off. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
+				std::cout<<"The row you provided is of bounds. You can't stand on the edge, your helper might fall off. The max row you can select is "<< sweep->getRowMax()-1<<"\n Row:";
 				std::cin>>row;
 
 				while(std::cin.fail()) //failbit
