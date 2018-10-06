@@ -116,6 +116,7 @@ bool Minesweeper::Marking(int Row, int Col)
     else
     {
       Uboard[Row][Col] = "F";
+      Sboard[Row][Col] = "F";
       if(Bboard[Row][Col]=="M")
       {
         NumOfFlag++;
@@ -152,6 +153,7 @@ void Minesweeper::unMarking(int Row,int Col)
       NumOfFlag--;
     }
     Uboard[Row][Col]="■";
+    Sboard[Row][Col]="■";
   }
 }
 //end unMarking
@@ -291,7 +293,7 @@ void Minesweeper::Reset()
     for(int j=0;j<m_col;j++)
     {
       Uboard[i][j]="■";
-      Bboard[i][j]="■";
+      Bboard[i][j]="□";
     }
   }
   setMines();
