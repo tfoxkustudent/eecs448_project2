@@ -110,7 +110,6 @@ std::shared_ptr<Minesweeper> Executive::create()
 			std::cout<<endl;
 		}			//end failbit
 	}
-	m_flag = 0;
 	return std::make_shared<Minesweeper>(row,col,mines);
 }
 
@@ -248,7 +247,6 @@ void Executive::run()
 					if(playChoice=='Y' || playChoice=='y')
 					{
 						sweep = create();
-						m_flag=0;
 					}
 					else
 					{
